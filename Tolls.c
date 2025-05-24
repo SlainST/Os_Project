@@ -7,3 +7,4 @@
 #include <stdlib.h>
 
 
+int b = 3;

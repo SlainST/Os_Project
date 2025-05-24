@@ -7,4 +7,4 @@
 #include <stdlib.h>
 
 
-int a=8;
+int b = 3;

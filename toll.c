@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "toll.h" // Include the header
+#include "toll.h"
+#include <thread.h>
 
 // Actual struct definition (private)
 struct Toll {

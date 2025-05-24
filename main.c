@@ -6,6 +6,8 @@
 #include <time.h>
 #include <stdlib.h>
 
-
-int aaa=55;
-int b = 3;
+int main(int argc, char const *argv[])
+{
+    printf("a");
+    return 0;
+}

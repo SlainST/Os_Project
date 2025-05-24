@@ -7,5 +7,4 @@
 #include <stdlib.h>
 
 
-aaa
 int aaa=55;

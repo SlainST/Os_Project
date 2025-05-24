@@ -10,4 +10,17 @@ int main(int argc, char const *argv[])
 {
     printf("a");
     return 0;
+
+
 }
+
+typedef struct{
+    bool hasPassedToll;
+    bool isOnFerry;
+    int capacity;
+    int busyTime;
+    bool isStartingSide;
+    bool isCompleted;
+}Car;
+
+

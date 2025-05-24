@@ -7,3 +7,4 @@
 #include <stdlib.h>
 
 
+int a=8;

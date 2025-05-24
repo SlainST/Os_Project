@@ -7,5 +7,5 @@
 #include <stdlib.h>
 
 
+int aaa=55;
 int b = 3;
-int asdadas=65;

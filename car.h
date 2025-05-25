@@ -1,5 +1,5 @@
 #ifndef CAR_H
-#define CAR_H // Corrected: Consistent naming
+#define CAR_H 
 
 #include <stdio.h>
 #include <stdbool.h>
@@ -12,7 +12,7 @@
 struct Car {
     bool hasPassedToll;
     bool isOnFerry;
-    int size;
+    int size ;
     int busyTime;
     bool isStartingSide;
     bool isCompleted;
@@ -20,4 +20,6 @@ struct Car {
 
 typedef struct Car Car;
     
+void Car_init(Car* c);
+
 #endif 

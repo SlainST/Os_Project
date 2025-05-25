@@ -1,6 +1,7 @@
 {
-    "files.associations": {
-        "stdlib.h": "c",
-        "string.h": "c"
-    }
+    // You might have other settings here
+    "code-runner.executorMap": {
+        "c": "cd $dir && gcc main.c car.c minibus.c truck.c -o main -Wall -Wextra -g && $dir./main"
+    },
+    "code-runner.runInTerminal": true // This is highly recommended to see output properly
 }

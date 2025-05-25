@@ -1,5 +1,5 @@
 #ifndef TRUCK_H
-#define TRUCK_H // Corrected: Consistent naming
+#define TRUCK_H 
 
 
 #include <stdio.h>
@@ -21,6 +21,6 @@ struct Truck{
 
 typedef struct Truck Truck;
 
-
+void Truck_init(Truck* t);
     
 #endif 

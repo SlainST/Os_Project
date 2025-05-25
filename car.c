@@ -8,3 +8,13 @@
 
 #include "car.h"
 
+void Car_init(Car* c){
+    
+    c->hasPassedToll = false;
+    c->size=1;
+    c->isCompleted=false;
+    c->isOnFerry=false;
+    c->isStartingSide=true;
+    c->busyTime=(rand() % 100) + 1;
+
+}

@@ -15,6 +15,8 @@
 
 int main(int argc, char const *argv[])
 {
+    (void)argc;
+    (void)argv; 
     srand(time(NULL));
 
     // Toll* p1 = Toll_create(10, 20);
@@ -42,76 +44,31 @@ int main(int argc, char const *argv[])
     Truck* trucks[sizeOfTruck];
 
     Car c1;
-    c1.hasPassedToll = false;
-    c1.isOnFerry = false;
-    c1.size = 1;
-    c1.busyTime = (rand() % 100) + 1;
-    c1.isStartingSide = true;
-    c1.isCompleted = false;
+    Car_init(&c1);
 
     Car c2;
-    c2.hasPassedToll = false;
-    c2.isOnFerry = false;
-    c2.size = 1;
-    c2.busyTime = (rand() % 100) + 1;
-    c2.isStartingSide = true;
-    c2.isCompleted = false;
+    Car_init(&c2);
 
     Car c3;
-    c3.hasPassedToll = false;
-    c3.isOnFerry = false;
-    c3.size = 1;
-    c3.busyTime = (rand() % 100) + 1;
-    c3.isStartingSide = true;
-    c3.isCompleted = false;
+    Car_init(&c3);
 
     Minibus m1;
-    m1.hasPassedToll = false;
-    m1.isOnFerry = false;
-    m1.size = 2;
-    m1.busyTime = (rand() % 100) + 1;
-    m1.isStartingSide = true;
-    m1.isCompleted = false;
+    Minibus_init(&m1);
 
     Minibus m2;
-    m2.hasPassedToll = false;
-    m2.isOnFerry = false;
-    m2.size = 2;
-    m2.busyTime = (rand() % 100) + 1;
-    m2.isStartingSide = true;
-    m2.isCompleted = false;
+    Minibus_init(&m2);
 
     Minibus m3;
-    m3.hasPassedToll = false;
-    m3.isOnFerry = false;
-    m3.size = 2;
-    m3.busyTime = (rand() % 100) + 1;
-    m3.isStartingSide = true;
-    m3.isCompleted = false;
+    Minibus_init(&m3);
 
     Truck t1;
-    t1.hasPassedToll = false;
-    t1.isOnFerry = false;
-    t1.size = 3;
-    t1.busyTime = (rand() % 100) + 1;
-    t1.isStartingSide = true;
-    t1.isCompleted = false;
+    Truck_init(&t1);
 
     Truck t2;
-    t2.hasPassedToll = false;
-    t2.isOnFerry = false;
-    t2.size = 3;
-    t2.busyTime = (rand() % 100) + 1;
-    t2.isStartingSide = true;
-    t2.isCompleted = false;
+    Truck_init(&t2);
 
     Truck t3;
-    t3.hasPassedToll = false;
-    t3.isOnFerry = false;
-    t3.size = 3;
-    t3.busyTime = (rand() % 100) + 1;
-    t3.isStartingSide = true;
-    t3.isCompleted = false;
+    Truck_init(&t3);
 
     cars[0] = &c1;
     cars[1] = &c2;
@@ -127,6 +84,14 @@ int main(int argc, char const *argv[])
 
     for(int i = 0; i < 3; i++){
         printf("%d. car: busyTime = %d\n", i, cars[i]->busyTime);
+    }
+
+    for(int i = 0; i < 3; i++){
+        printf("%d. minibus: busyTime = %d\n", i, minibuses[i]->busyTime);
+    }
+
+    for(int i = 0; i < 3; i++){
+        printf("%d. truck: busyTime = %d\n", i, trucks[i]->busyTime);
     }
 
     return 0;

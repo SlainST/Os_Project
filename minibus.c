@@ -8,3 +8,13 @@
 
 #include "minibus.h"
 
+void Minibus_init(Minibus* m){
+    
+    m->hasPassedToll = false;
+    m->size=2;
+    m->isCompleted=false;
+    m->isOnFerry=false;
+    m->isStartingSide=true;
+    m->busyTime=(rand() % 100) + 101;
+
+}

@@ -1,5 +1,5 @@
 #ifndef MINIBUS_H
-#define MINIBUS_H // Corrected: Consistent naming
+#define MINIBUS_H 
 
 
 
@@ -23,5 +23,7 @@ struct Minibus{
 };
 
 typedef struct Minibus Minibus;
+
+void Minibus_init(Minibus* m);
     
 #endif 

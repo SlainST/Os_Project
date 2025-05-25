@@ -6,10 +6,5 @@
 #include <time.h>
 #include <stdlib.h>
 
-#include "car.h"
+#include "minibus.h"
 
-struct Minibus {
-    char make[50];
-    char model[50];
-    int year;
-};

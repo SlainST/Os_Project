@@ -6,10 +6,5 @@
 #include <time.h>
 #include <stdlib.h>
 
-#include "car.h"
+#include "truck.h"
 
-struct Truck {
-    char make[50];
-    char model[50];
-    int year;
-};

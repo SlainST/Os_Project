@@ -8,32 +8,10 @@
 
 // #include "toll.h"
 
-typedef struct{
-    bool hasPassedToll;
-    bool isOnFerry;
-    int size;
-    int busyTime;
-    bool isStartingSide;
-    bool isCompleted;
-}Car;
+#include "minibus.h"
+#include "car.h"
+#include "truck.h"
 
-typedef struct{
-    bool hasPassedToll;
-    bool isOnFerry;
-    int size;
-    int busyTime;
-    bool isStartingSide;
-    bool isCompleted;
-}Minibus;
-
-typedef struct{
-    bool hasPassedToll;
-    bool isOnFerry;
-    int size;
-    int busyTime;
-    bool isStartingSide;
-    bool isCompleted;
-}Truck;
 
 int main(int argc, char const *argv[])
 {
@@ -59,9 +37,9 @@ int main(int argc, char const *argv[])
     int sizeOfMinibus = 10;
     int sizeOfTruck = 8;
 
-    Car cars[sizeOfCar];
-    Minibus minibuses[sizeOfMinibus];
-    Truck trucks[sizeOfTruck];
+    Car* cars[sizeOfCar];
+    Minibus* minibuses[sizeOfMinibus];
+    Truck* trucks[sizeOfTruck];
 
     Car c1;
     c1.hasPassedToll = false;
@@ -135,20 +113,20 @@ int main(int argc, char const *argv[])
     t3.isStartingSide = true;
     t3.isCompleted = false;
 
-    cars[0] = c1;
-    cars[1] = c2;
-    cars[2] = c3;
+    cars[0] = &c1;
+    cars[1] = &c2;
+    cars[2] = &c3;
 
-    minibuses[0] = m1;
-    minibuses[1] = m2;
-    minibuses[2] = m3;
+    minibuses[0] = &m1;
+    minibuses[1] = &m2;
+    minibuses[2] = &m3;
 
-    trucks[0] = t1;
-    trucks[1] = t2;
-    trucks[2] = t3;
+    trucks[0] = &t1;
+    trucks[1] = &t2;
+    trucks[2] = &t3;
 
     for(int i = 0; i < 3; i++){
-        printf("%d. car: busyTime = %d\n", i, cars[i].busyTime);
+        printf("%d. car: busyTime = %d\n", i, cars[i]->busyTime);
     }
 
     return 0;

@@ -3,5 +3,10 @@
     "code-runner.executorMap": {
         "c": "cd $dir && gcc main.c car.c minibus.c truck.c -o main -Wall -Wextra -g && $dir./main"
     },
-    "code-runner.runInTerminal": true // This is highly recommended to see output properly
+    "code-runner.runInTerminal": true,
+    "files.associations": {
+        "stdlib.h": "c",
+        "time.h": "c",
+        "ctype.h": "c"
+    } // This is highly recommended to see output properly
 }

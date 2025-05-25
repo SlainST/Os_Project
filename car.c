@@ -16,5 +16,6 @@ void Car_init(Car* c){
     c->isOnFerry=false;
     c->isStartingSide=true;
     c->busyTime=(rand() % 100) + 1;
+    
 
 }

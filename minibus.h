@@ -17,6 +17,7 @@ struct Minibus{
     bool hasPassedToll;
     bool isOnFerry;
     int size;
+    int timesWaited;
     int busyTime;
     bool isStartingSide;
     bool isCompleted;

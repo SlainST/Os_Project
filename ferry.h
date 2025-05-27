@@ -20,7 +20,9 @@
 struct Ferry {
     int capacity;
     bool isWentToAcross;
+    bool inFirstRound;
     int usedCapacity;
+    int inWhichSquare;
     Car* cars[20];
     Truck* trucks[6];
     Minibus* minibusses[10]; 

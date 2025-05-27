@@ -16,5 +16,6 @@ void Minibus_init(Minibus* m){
     m->isOnFerry=false;
     m->isStartingSide=true;
     m->busyTime=(rand() % 100) + 101;
+    m->timesWaited=0;
 
 }

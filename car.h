@@ -11,6 +11,7 @@
 
 struct Car {
     bool hasPassedToll;
+    int timesWaited;
     bool isOnFerry;
     int size ;
     int busyTime;

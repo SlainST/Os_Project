@@ -30,8 +30,8 @@ typedef struct Ferry Ferry;
 
 void Ferry_init(Ferry* fe);
 
-void Take_vehicles(Car* cars[20], Minibus* minibusses[], Truck* trucks[]);
+void Take_vehicles(Ferry* fe,Square square);
 
-void Pass_vehicles(Car* cars[20], Minibus* minibusses[], Truck* trucks[]);
+void Pass_vehicles(Ferry* fe,Car* cars[20], Minibus* minibusses[10], Truck* trucks[6]);
 
 #endif

@@ -1,6 +1,13 @@
 #ifndef SQUARE_H
 #define SQUARE_H 
 
+
+#define CARS_LENGTH 40
+#define MINIBUSES_LENGTH 20
+#define TRUCKS_LENGTH 12
+
+
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
@@ -15,16 +22,23 @@
 #include <minibus.h>
 #include <toll.h>
 #include <ferry.h>
+
+
 struct Square {
     Car* cars[40];
     Minibus* minibuses[20];
     Truck* trucks[12];
 
+   
 };
-
+carsLength=40;
+minibusesLength=20;
+trucksLength=12;
 typedef struct Square Square;
     
 void Square_load(Square* self, Toll* toll);
+
+// void Square_load_ferry(Square* self, Ferry* ferry);
 
 Car* Square_car_Left(Square* self, Ferry* ferry);
 

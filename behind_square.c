@@ -14,7 +14,7 @@
 #include "behind_square.h"
 
 
-bool isAllEmpty=false;
+bool isAllEmpty=true;
 Car* carWillBeSend;
 Minibus* minibusWillBeSend;
 Truck* truckWillBeSend;
@@ -25,13 +25,15 @@ Car* Behind_Square_Car_Left(Behind_Square* self){
     if (!self ) {
         return;
     }
+    isAllEmpty=true;
     for(int i=0;i<carsLength;i++){
         if(self->cars[i]!=NULL){
             isAllEmpty=false;
             break;
         }
-        else{
-            isAllEmpty=true;
+        else{    
+        }
+        if(i== carsLength-1  && isAllEmpty){
             return;
         }
     }
@@ -57,7 +59,10 @@ Minibus* Behind_Square_Minibus_Left(Behind_Square* self){
             break;
         }
         else{
-            isAllEmpty=true;
+            
+            
+        }
+        if(i== minibusesLength-1 && isAllEmpty){
             return;
         }
     }
@@ -82,7 +87,10 @@ Truck* Behind_Square_Truck_Left(Behind_Square* self){
             break;
         }
         else{
-            isAllEmpty=true;
+            
+            
+        }
+        if(i== trucksLength-1 && isAllEmpty){
             return;
         }
     }

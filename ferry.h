@@ -17,15 +17,19 @@
 #include "truck.h"
 
 
+const int lengthOfCars=20;
+const int lengthOfMinibuses=10;
+const int lengthOfTrucks=6;
+
 struct Ferry {
     int capacity;
     bool isWentToAcross;
     bool inFirstRound;
     int usedCapacity;
     int inWhichSquare;
-    Car* cars[20];
-    Truck* trucks[6];
-    Minibus* minibusses[10]; 
+    Car* cars[lengthOfCars];
+    Truck* trucks[lengthOfTrucks];
+    Minibus* minibusses[lengthOfMinibuses]; 
 };
 
 typedef struct Ferry Ferry;
@@ -34,6 +38,6 @@ void Ferry_init(Ferry* fe);
 
 void Take_vehicles(Ferry* fe,Square square);
 
-void Pass_vehicles(Ferry* fe,Car* cars[20], Minibus* minibusses[10], Truck* trucks[6]);
+void Pass_vehicles(Ferry* fe);
 
 #endif

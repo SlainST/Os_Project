@@ -10,6 +10,17 @@
 #include "square.h"
 #include <toll.h>
 
+Car* carWillBeSend;
+Minibus* minibusWillBeSend;
+Truck* truckWillBeSend;
+
+bool isAllEmpty=false;
+// void Square_load_ferry(Square* self, Toll* toll){
+    
+// }
+
+
+
 void Square_load(Square* self, Toll* toll){
     if ( self || !toll) {
         return;
@@ -79,14 +90,98 @@ void Square_load(Square* self, Toll* toll){
 
 }
 
+
+
+
+
+
 Car* Square_car_Left(Square* self, Ferry* ferry){ //tolldaki hatalı kodlama olurdu çünkü her left loaddan sonra değil
+//ferry gerekli mi burda
+
+    if (!self ) {
+        return;
+    }
+    for(int i=0;i<carsLength;i++){
+        if(self->cars[i]!=NULL){
+            isAllEmpty=false;
+            break;
+        }
+        else{
+            isAllEmpty=true;
+            
+        }
+        if(i== carsLength-1){
+            return;
+        }
+    }
+
+    int vehicle_type_choice = rand() % minibusesLength;
+
+    while(self->minibuses[vehicle_type_choice]==NULL&& !isAllEmpty) {
+        vehicle_type_choice = rand() % minibusesLength;
+    }
+    carWillBeSend=self->minibuses[vehicle_type_choice];
+    self->minibuses[vehicle_type_choice]=NULL;
+    return carWillBeSend;
+
 
 }
 
 Minibus* Square_minibus_Left(Square* self, Ferry* ferry){
+    if (!self ) {
+        return;
+    }
+    for(int i=0;i<carsLength;i++){
+        if(self->cars[i]!=NULL){
+            isAllEmpty=false;
+            break;
+        }
+        else{
+            isAllEmpty=true;
+            
+        }
+        if(i== carsLength-1){
+            return;
+        }
+    }
+
+    int vehicle_type_choice = rand() % minibusesLength;
+
+    while(self->minibuses[vehicle_type_choice]==NULL&& !isAllEmpty) {
+        vehicle_type_choice = rand() % minibusesLength;
+    }
+    carWillBeSend=self->minibuses[vehicle_type_choice];
+    self->minibuses[vehicle_type_choice]=NULL;
+    return carWillBeSend;
+
 
 }
-
 Truck* Square_truck_Left(Square* self, Ferry* ferry){
+    if (!self ) {
+        return;
+    }
+    for(int i=0;i<carsLength;i++){
+        if(self->cars[i]!=NULL){
+            isAllEmpty=false;
+            break;
+        }
+        else{
+            isAllEmpty=true;
+            
+        }
+        if(i== carsLength-1){
+            return;
+        }
+    }
+
+    int vehicle_type_choice = rand() % minibusesLength;
+
+    while(self->minibuses[vehicle_type_choice]==NULL&& !isAllEmpty) {
+        vehicle_type_choice = rand() % minibusesLength;
+    }
+    carWillBeSend=self->minibuses[vehicle_type_choice];
+    self->minibuses[vehicle_type_choice]=NULL;
+    return carWillBeSend;
+
 
 }

@@ -10,8 +10,15 @@
 #include <minibus.h>
 #include <truck.h>
 
-#include <ferry.h>
+#include "ferry.h"
 #include <square.h>
+
+
+bool isAllEmpty=false;
+
+Car* carWillBeSend;
+Minibus* minibusWillBeSend;
+Truck* truckWillBeSend;
 
 void Ferry_init(Ferry* fe){
 
@@ -26,63 +33,103 @@ void Take_vehicles(Ferry* fe, Square* square){
     int count_car=0;
     int count_minibus=0;
     int count_truck=0;
-    while (fe->usedCapacity<=17){
+    while (fe->usedCapacity<20){
 
         if(which==0){
-            int slots_to_check = 40;
-            int count_local=0;
-            int filled_indices[slots_to_check];
-            for (int i = 0; i < slots_to_check; i++) {
+            //skip if 
+            for(int i=0; i<CARS_LENGTH;i++){
+                if(square->cars[i]!=NULL){
+                    isAllEmpty=false;
+                }
+                else{
+                    
+                }
+                
+                //wait 300ms for after
+            }
+            if(isAllEmpty=true){
+                return;
+            }
+            else{
+                for(int i=fe->usedCapacity;i< fe->capacity;){
+                    if(fe->capacity<fe->usedCapacity+1){
+                        break;
+                    }
+                    
+                    fe->minibusses[fe->usedCapacity]=Behind_Square_Truck_Left(sqrt);
 
-                if (square->cars[i] != NULL) { 
-                    filled_indices[count_local] = i; //what it does is checking for filled array spaces
+
+
+                    fe->usedCapacity=fe->usedCapacity+1;
+                    if(fe->capacity<fe->usedCapacity+1){
+                        break;
+                    }
                 }
             }
-
-            if (count_local > 0) {
-                int random_choice = rand() % count_local;
-                fe->cars[count_truck] = square->cars[filled_indices[random_choice]];
-                count_car++;
-            }
-
             
             
         }
         if (which == 1) {
-            int slots_to_check_minibus = 20;
-            int count_local = 0;
-            int filled_indices[slots_to_check_minibus];
-            for (int i = 0; i < slots_to_check_minibus; i++) {
-                if (square->minibuses[i] != NULL) {
-                    filled_indices[count_local] = i;
+            for(int i=0; i<MINIBUSES_LENGTH;i++){
+                if(square->minibuses[i]!=NULL){
+                    isAllEmpty=false;
                 }
+                else{
+                    
+                }
+                
+                //wait 300ms for after
             }
+            if(isAllEmpty=true){
+                return;
+            }
+            else{
+                for(int i=fe->usedCapacity;i<fe->capacity;){
+                    if(fe->capacity<fe->usedCapacity+2){
+                        break;
+                    }
+                    fe->minibusses[fe->usedCapacity]=Behind_Square_Minibus_Left(sqrt);
 
-            if (count_local > 0) {
-                int random_choice = rand() % count_local;
-                if (count_minibus < slots_to_check_minibus) {
-                    fe->minibusses[count_truck] = square->minibuses[filled_indices[random_choice]];
-                    count_minibus++;
+
+
+                    fe->usedCapacity=fe->usedCapacity+2;
+                    if(fe->capacity<fe->usedCapacity+2){
+                        break;
+                    }
                 }
             }
         }
         if (which == 2) {
-            int slots_to_check_truck = 12;
-            int count_local = 0;
-            int filled_indices[slots_to_check_truck];
-            for (int i = 0; i < slots_to_check_truck; i++) {
-                if (square->trucks[i] != NULL) {
-                    filled_indices[count_local] = i;
+            
+            for(int i=0; i<TRUCKS_LENGTH;i++){
+                if(square->trucks[i]!=NULL){
+                    isAllEmpty=false;
                 }
+                else{
+                    
+                }
+                
+                //wait 300ms for after
             }
+            if(isAllEmpty=true){
+                return;
+            }
+            else{
+                for(int i=fe->usedCapacity;i<fe->capacity;){
+                    if(fe->capacity<fe->usedCapacity+3){
+                        break;
+                    }
+                    fe->trucks[fe->usedCapacity]=Behind_Square_Truck_Left(sqrt);
 
-            if (count_local > 0) {
-                int random_choice = rand() % count_local;
-                if (count_truck < slots_to_check_truck) {
-                    fe->trucks[count_truck] = square->trucks[filled_indices[random_choice]];
-                    count_truck++;
+
+
+                    fe->usedCapacity=fe->usedCapacity+3;
+                    if(fe->capacity<fe->usedCapacity+3){
+                        break;
+                    }
                 }
             }
+            
         }
     }
     
@@ -91,90 +138,142 @@ void Take_vehicles(Ferry* fe, Square* square){
 
 }
 
-void Pass_vehicles(Ferry* fe,Car* cars[20], Minibus* minibusses[10], Truck* trucks[6]){
-    
-    if(fe->inWhichSquare==0){
-
-        fe->inWhichSquare=1;
-
-        int slots_to_check = 20;
-            int count_local=0;
-            int filled_cars[slots_to_check];
-            for (int i = 0; i < slots_to_check; i++) {
-
-                if (fe->cars[i] != NULL) { 
-                    filled_cars[count_local++] = i; //what it does is checking for filled array spaces
-                }
+void Pass_vehicles(Ferry* fe,Square* square0, Square* square1){
+    if(!fe->isWentToAcross){
+        for(int i=0;i<lengthOfCars;i++){
+            if(fe->cars[i]==NULL){
             }
-
-        for(int i=0; i<count_local;i++){
-
-            //empty to other square
-
-        }
-
-
-
-        int slots_to_check = 10;
-            int count_local=0;
-            int filled_minibuses[slots_to_check];
-            for (int i = 0; i < slots_to_check; i++) {
-
-                if (fe->minibusses[i] != NULL) { 
-                    filled_minibuses[count_local++] = i; //what it does is checking for filled array spaces
-                }
-            }
-        for(int i=0; i<count_local;i++){
-
-
-        }
-
-
-
-        int slots_to_check = 6;
-            int count_local=0;
-            int filled_trucks[slots_to_check];
-            for (int i = 0; i < slots_to_check; i++) {
-
-                if (fe->trucks[i] != NULL) { 
-                    filled_trucks[count_local++] = i; //what it does is checking for filled array spaces
-                }
-            }
-        for(int i=0; i<count_local;i++){
-
-
-        }
-
-
-
-        if(fe->inFirstRound){
-
-            //empty come back
-
-
-
-            //
-            fe->inFirstRound=false;
-
-        }
-    }
-
-    if(fe->inWhichSquare==1){
-
-        //same stuff maybe
-
-        fe->inWhichSquare=0;
-        if(fe->inFirstRound){
-
-            //empty come back
-
+            else{
+                for(int j=0;j<CARS_LENGTH;j++){
+                    if(square0->cars[j]==NULL){
+                        square0->cars[j]=fe->cars[i];
+                        fe->cars[i]=NULL;
+                    }
+                    else{
+                        
+                    }
             
-            
-            //belki sadec inwhichsquare eski haline getir?
-            fe->inFirstRound=false;
+                }
+                
+            }
 
         }
     }
     
+
+    if(fe->isWentToAcross){
+        for(int i=0;i<lengthOfCars;i++){
+            if(fe->cars[i]==NULL){
+            }
+            else{
+                for(int j=0;j<CARS_LENGTH;j++){
+                    if(square1->cars[j]==NULL){
+                        square1->cars[j]=fe->cars[i];
+                        fe->cars[i]=NULL;
+                    }
+                    else{
+                        
+                    }
+            
+                }
+                
+            }
+
+        }
+    }
+    
+
+    if(!fe->isWentToAcross){
+        for(int i=0;i<lengthOfMinibuses;i++){
+            if(fe->minibusses[i]==NULL){
+            }
+            else{
+                for(int j=0;j<MINIBUSES_LENGTH;j++){
+                    if(square0->minibuses[j]==NULL){
+                        square0->minibuses[j]=fe->minibusses[i];
+                        fe->minibusses[i]=NULL;
+                    }
+                    else{
+                        
+                    }
+            
+                }
+                
+            }
+
+        }
+    }
+
+
+    if(fe->isWentToAcross){
+        for(int i=0;i<lengthOfMinibuses;i++){
+            if(fe->minibusses[i]==NULL){
+            }
+            else{
+                for(int j=0;j<MINIBUSES_LENGTH;j++){
+                    if(square1->minibuses[j]==NULL){
+                        square1->minibuses[j]=fe->minibusses[i];
+                        fe->minibusses[i]=NULL;
+                    }
+                    else{
+                        
+                    }
+            
+                }
+                
+            }
+
+        }
+    }
+
+
+    if(!fe->isWentToAcross){
+        for(int i=0;i<lengthOfTrucks;i++){
+            if(fe->trucks[i]==NULL){
+            }
+            else{
+                for(int j=0;j<TRUCKS_LENGTH;j++){
+                    if(square0->trucks[j]==NULL){
+                        square0->trucks[j]=fe->trucks[i];
+                        fe->trucks[i]=NULL;
+                    }
+                    else{
+                        
+                    }
+            
+                }
+                
+            }
+
+        }
+    }
+
+
+
+    if(!fe->isWentToAcross){
+        for(int i=0;i<lengthOfTrucks;i++){
+            if(fe->trucks[i]==NULL){
+            }
+            else{
+                for(int j=0;j<TRUCKS_LENGTH;j++){
+                    if(square1->trucks[j]==NULL){
+                        square1->trucks[j]=fe->trucks[i];
+                        fe->trucks[i]=NULL;
+                    }
+                    else{
+                        
+                    }
+            
+                }
+                
+            }
+
+        }
+    }
+
+
+    fe->usedCapacity=0;
+
+
 }
 

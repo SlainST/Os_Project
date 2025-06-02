@@ -13,6 +13,8 @@
 #include <truck.h>
 #include <car.h>
 #include <minibus.h>
+#include <toll.h>
+#include <ferry.h>
 struct Square {
     Car* cars[40];
     Minibus* minibuses[20];
@@ -22,8 +24,14 @@ struct Square {
 
 typedef struct Square Square;
     
-void Square_load(Car* cars[40], Minibus* minibusses[20], Truck* trucks[12]);
+void Square_load(Square* self, Toll* toll);
 
-void Square_Left(Car* cars[20], Minibus* minibusses[10], Truck* trucks[6]);
+Car* Square_car_Left(Square* self, Ferry* ferry);
+
+
+Minibus* Square_minibus_Left(Square* self, Ferry* ferry);
+
+
+Truck* Square_truck_Left(Square* self, Ferry* ferry);
 
 #endif 

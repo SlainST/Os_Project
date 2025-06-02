@@ -1,19 +1,34 @@
 #ifndef TOLL_H
 #define TOLL_H
 
+#include <behind_square.h>
+
+
+#include <truck.h>
+#include <car.h>
+#include <minibus.h>
+#include <square.h>
+
+
+const int carsLength=1;
+const int minibusesLength=1;
+const int trucksLength=1;
+struct Toll {
+    Car* cars[carsLength];
+    Minibus* minibuses[minibusesLength];
+    Truck* trucks[trucksLength];
+
+};
 // Forward declaration (opaque pointer) - internal structure is hidden
 typedef struct Toll Toll;
 
-// Constructor and Destructor Toll* Toll_create(int x, int y);
-Toll* Toll_create(int x, int y);
-void Toll_destroy( Toll* p);
 
-// Accessor methods (Getters)
-int Toll_getX(const Toll* p);
-int Toll_getY(const Toll* p);
+Toll* Toll_create_vehicle_arrays(); 
+void Toll_destroy_vehicle_arrays(Toll* toll); //examples
 
-// Other methods
-void Toll_move( Toll* p, int dx, int dy);
-void Toll_print(const Toll* p);
 
+void Toll_random_choose(Toll* toll_instance, Behind_Square* bs_instance, Square* square);
+Car* Toll_car_return(Toll* toll);
+Minibus* Toll_minibus_return(Toll* toll);
+Truck* Toll_truck_return(Toll* toll);
 #endif // Toll_H

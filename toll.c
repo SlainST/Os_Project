@@ -1,47 +1,121 @@
 #include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+#include <math.h>
+#include <ctype.h>
+#include <time.h>
 #include <stdlib.h>
+
+
 #include "toll.h"
 #include <thread.h>
+#include <behind_square.h>
 
-// Actual struct definition (private)
-struct Toll {
-    int x;
-    int y;
-};
 
-Toll* Toll_create(int x, int y) {
-    Toll* p = (Toll*)malloc(sizeof(Toll));
-    if (p != NULL) {
-        p->x = x;
-        p->y = y;
-    }
-    return p;
+Car* carWillBeSend;
+Minibus* minibusWillBeSend;
+Truck* truckWillBeSend;
+
+
+int i;
+void Toll_destroy_vehicle_arrays(Toll* toll) {
+    free(toll); //free aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 }
 
-void Toll_destroy(Toll* p) {
-    free(p);
-}
-
-int Toll_getX(const Toll* p) {
-    if (p == NULL) return 0; // Or handle error
-    return p->x;
-}
-
-int Toll_getY(const Toll* p) {
-    if (p == NULL) return 0; // Or handle error
-    return p->y;
-}
-
-void Toll_move(Toll* p, int dx, int dy) {
-    if (p == NULL) return;
-    p->x += dx;
-    p->y += dy;
-}
-
-void Toll_print(const Toll* p) {
-    if (p == NULL) {
-        printf("Toll is NULL\n");
+void Toll_random_choose(Toll* self_toll, Behind_Square* bs, Square square) {
+    if (!self_toll || !bs) {
         return;
     }
-    printf("Toll(%d, %d)\n", p->x, p->y);
+
+    int vehicle_type_choice = rand() % 3;
+
+    if (vehicle_type_choice == 0) {
+        Car* new_car = Behind_Square_Car_Left(bs);
+        if (new_car != NULL) {
+            int placed = 0;
+            for (i = 0; i < carsLength; ++i) {
+                if (self_toll->cars[i] == NULL) {
+                    self_toll->cars[i] = new_car;
+                    placed = 1;
+
+
+                   //hemen de kurtulmalı hemen olmazsa bile ardından
+
+                    ///bla bla bekle
+                    
+                    Toll_car_return(self_toll);
+                    break;
+
+
+                }
+            }
+            if (!placed) {
+            }
+        }
+    } else if (vehicle_type_choice == 1) {
+        Minibus* new_minibus = Behind_Square_Minibus_Left(bs);
+        if (new_minibus != NULL) {
+            int placed = 0;
+            for (i = 0; i < minibusesLength; ++i) {
+                if (self_toll->minibuses[i] == NULL) {
+                    self_toll->minibuses[i] = new_minibus;
+                    placed = 1;
+                    
+                    
+                    Toll_minibus_return(self_toll);
+                    break;
+
+                    
+                }
+            }
+            if (!placed) {
+            }
+        }
+    } else {
+        Truck* new_truck = Behind_Square_Truck_Left(bs);
+        if (new_truck != NULL) {
+            int placed = 0;
+            for (i = 0; i < trucksLength; ++i) {
+                if (self_toll->trucks[i] == NULL) {
+                    self_toll->trucks[i] = new_truck;
+                    placed = 1;
+                    
+                    
+
+                    Toll_truck_return(self_toll);
+                    break;
+
+
+                }
+            }
+            if (!placed) {
+            }
+        }
+    }
+}
+
+
+Car* Toll_car_return(Toll* self_toll){
+    carWillBeSend= self_toll->cars[i]; //hatalı kodlama değil çükü her return tolldan sonra çalışcak
+                    
+                    self_toll->cars[i]=NULL;
+                    return carWillBeSend;
+
+
+}
+
+Minibus* Toll_minibus_return(Toll* self_toll){
+    minibusWillBeSend= self_toll->minibuses[i];
+                    
+                    self_toll->minibuses[i]=NULL;
+                    return minibusWillBeSend;
+
+}
+
+Truck* Toll_truck_return(Toll* self_toll){
+
+    truckWillBeSend= self_toll->trucks[i];
+                    
+    self_toll->trucks[i]=NULL;
+    return truckWillBeSend;
 }

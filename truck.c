@@ -16,5 +16,6 @@ void Truck_init(Truck* t){
     t->isOnFerry=false;
     t->isStartingSide=true;
     t->busyTime=(rand() % 100) + 201;
+    t->randomId=(rand() % 10000);
     t->timesWaited=0;
 }

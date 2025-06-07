@@ -38,6 +38,6 @@ void Ferry_init(Ferry* fe);
 
 void Take_vehicles(Ferry* fe,Square square);
 
-void Pass_vehicles(Ferry* fe);
+void Pass_vehicles(Ferry* fe, Square square1, Square square2, Behind_Square bs1, Behind_Square bs2);
 
 #endif

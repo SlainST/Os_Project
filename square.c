@@ -6,6 +6,9 @@
 #include <time.h>
 #include <stdlib.h>
 
+#include <truck.h>
+#include <car.h>
+#include <minibus.h>
 
 #include "square.h"
 #include <toll.h>

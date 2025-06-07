@@ -13,6 +13,7 @@
         "truck.h": "c",
         "minibus.h": "c",
         "stdbool.h": "c",
-        "behind_square.h": "c"
+        "behind_square.h": "c",
+        "random": "c"
     } // This is highly recommended to see output properly
 }

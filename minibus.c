@@ -17,5 +17,6 @@ void Minibus_init(Minibus* m){
     m->isStartingSide=true;
     m->busyTime=(rand() % 100) + 101;
     m->timesWaited=0;
+    m->randomId=(rand() % 10000);
 
 }

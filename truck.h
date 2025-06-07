@@ -18,6 +18,7 @@ struct Truck{
     bool isStartingSide;
     bool isCompleted;
     int timesWaited;
+    int randomId;
 };
 
 typedef struct Truck Truck;

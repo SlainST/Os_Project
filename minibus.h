@@ -21,6 +21,7 @@ struct Minibus{
     int busyTime;
     bool isStartingSide;
     bool isCompleted;
+    int randomId;
 };
 
 typedef struct Minibus Minibus;

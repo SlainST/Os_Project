@@ -15,15 +15,15 @@
 #include <minibus.h>
 
 
-const int carsLength=40;
-const int minibusesLength=20;
-const int trucksLength=12;
+int carsLength=40;
+int minibusesLength=20;
+int trucksLength=12;
 
 
 struct Behind_Square {
-    Car* cars[carsLength];
-    Minibus* minibuses[minibusesLength];
-    Truck* trucks[trucksLength];
+    Car* cars[40];
+    Minibus* minibuses[20];
+    Truck* trucks[12];
 
 };
 

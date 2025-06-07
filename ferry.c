@@ -12,6 +12,7 @@
 
 #include "ferry.h"
 #include <square.h>
+#include <behind_square.h>
 
 
 bool isAllEmpty=false;
@@ -138,26 +139,54 @@ void Take_vehicles(Ferry* fe, Square* square){
 
 }
 
-void Pass_vehicles(Ferry* fe,Square* square0, Square* square1){
+void Pass_vehicles(Ferry* fe,Square* square0, Square* square1, Behind_Square* bs1, Behind_Square* bs2){
     if(!fe->isWentToAcross){
         for(int i=0;i<lengthOfCars;i++){
             if(fe->cars[i]==NULL){
             }
             else{
                 for(int j=0;j<CARS_LENGTH;j++){
-                    if(square0->cars[j]==NULL){
-                        square0->cars[j]=fe->cars[i];
+                    if(bs2->cars[j]==NULL){
+                        bs2->cars[j]=fe->cars[i];
                         fe->cars[i]=NULL;
                     }
-                    else{
-                        
-                    }
+                    
             
-                }
-                
+                }                
             }
 
         }
+        for(int i=0;i<lengthOfMinibuses;i++){
+            if(fe->minibusses[i]==NULL){
+            }
+            else{
+                for(int j=0;j<MINIBUSES_LENGTH;j++){
+                    if(bs2->minibuses[j]==NULL){
+                        bs2->minibuses[j]=fe->minibusses[i];
+                        fe->minibusses[i]=NULL;
+                    }
+                    
+            
+                }                
+            }
+
+        }
+        for(int i=0;i<lengthOfTrucks;i++){
+            if(fe->trucks[i]==NULL){
+            }
+            else{
+                for(int j=0;j<TRUCKS_LENGTH;j++){
+                    if(bs2->trucks[j]==NULL){
+                        bs2->trucks[j]=fe->trucks[i];
+                        fe->trucks[i]=NULL;
+                    }
+                    
+            
+                }                
+            }
+
+        }
+        fe->isWentToAcross=true;
     }
     
 
@@ -167,109 +196,53 @@ void Pass_vehicles(Ferry* fe,Square* square0, Square* square1){
             }
             else{
                 for(int j=0;j<CARS_LENGTH;j++){
-                    if(square1->cars[j]==NULL){
-                        square1->cars[j]=fe->cars[i];
-                        fe->cars[i]=NULL;
-                    }
-                    else{
-                        
-                    }
+                    
+                    
+                    printf(fe->cars[i]->isCompleted);
+                    fe->cars[i]=NULL;
+                    
+                    
             
-                }
-                
+                }                
             }
 
         }
+        for(int i=0;i<lengthOfMinibuses;i++){
+            if(fe->minibusses[i]==NULL){
+            }
+            else{
+                for(int j=0;j<MINIBUSES_LENGTH;j++){
+                    if(bs2->minibuses[j]==NULL){
+                        bs2->minibuses[j]=fe->minibusses[i];
+                        fe->minibusses[i]=NULL;
+                    }
+                    
+            
+                }                
+            }
+
+        }
+        for(int i=0;i<lengthOfTrucks;i++){
+            if(fe->trucks[i]==NULL){
+            }
+            else{
+                for(int j=0;j<TRUCKS_LENGTH;j++){
+                    if(bs2->trucks[j]==NULL){
+                        bs2->trucks[j]=fe->trucks[i];
+                        fe->trucks[i]=NULL;
+                    }
+                    
+            
+                }                
+            }
+
+        }
+        fe->isWentToAcross=false;
     }
     
-
-    if(!fe->isWentToAcross){
-        for(int i=0;i<lengthOfMinibuses;i++){
-            if(fe->minibusses[i]==NULL){
-            }
-            else{
-                for(int j=0;j<MINIBUSES_LENGTH;j++){
-                    if(square0->minibuses[j]==NULL){
-                        square0->minibuses[j]=fe->minibusses[i];
-                        fe->minibusses[i]=NULL;
-                    }
-                    else{
-                        
-                    }
-            
-                }
-                
-            }
-
-        }
-    }
+    
 
 
-    if(fe->isWentToAcross){
-        for(int i=0;i<lengthOfMinibuses;i++){
-            if(fe->minibusses[i]==NULL){
-            }
-            else{
-                for(int j=0;j<MINIBUSES_LENGTH;j++){
-                    if(square1->minibuses[j]==NULL){
-                        square1->minibuses[j]=fe->minibusses[i];
-                        fe->minibusses[i]=NULL;
-                    }
-                    else{
-                        
-                    }
-            
-                }
-                
-            }
-
-        }
-    }
-
-
-    if(!fe->isWentToAcross){
-        for(int i=0;i<lengthOfTrucks;i++){
-            if(fe->trucks[i]==NULL){
-            }
-            else{
-                for(int j=0;j<TRUCKS_LENGTH;j++){
-                    if(square0->trucks[j]==NULL){
-                        square0->trucks[j]=fe->trucks[i];
-                        fe->trucks[i]=NULL;
-                    }
-                    else{
-                        
-                    }
-            
-                }
-                
-            }
-
-        }
-    }
-
-
-
-    if(!fe->isWentToAcross){
-        for(int i=0;i<lengthOfTrucks;i++){
-            if(fe->trucks[i]==NULL){
-            }
-            else{
-                for(int j=0;j<TRUCKS_LENGTH;j++){
-                    if(square1->trucks[j]==NULL){
-                        square1->trucks[j]=fe->trucks[i];
-                        fe->trucks[i]=NULL;
-                    }
-                    else{
-                        
-                    }
-            
-                }
-                
-            }
-
-        }
-    }
 
 
     fe->usedCapacity=0;

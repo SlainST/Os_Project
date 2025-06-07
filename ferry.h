@@ -27,9 +27,9 @@ struct Ferry {
     bool inFirstRound;
     int usedCapacity;
     int inWhichSquare;
-    Car* cars[lengthOfCars];
-    Truck* trucks[lengthOfTrucks];
-    Minibus* minibusses[lengthOfMinibuses]; 
+    Car* cars[40];
+    Minibus* minibusses[20];
+    Truck* trucks[12];
 };
 
 typedef struct Ferry Ferry;

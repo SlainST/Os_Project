@@ -5,10 +5,14 @@
 #include <ctype.h>
 #include <time.h>
 #include <stdlib.h>
+#include <time.h>
 
 
 #include "toll.h"
-#include <thread.h>
+#include <car.h>
+#include <minibus.h>
+#include <truck.h>
+
 #include <behind_square.h>
 
 
@@ -21,6 +25,27 @@ int i;
 void Toll_destroy_vehicle_arrays(Toll* toll) {
     free(toll); //free aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 }
+
+
+
+
+void wait_ms(long milisaniye) {
+    clock_t baslangic_zamani = clock();
+
+    // İstenen milisaniye süresine karşılık gelen clock tick sayısını hesapla
+    // ve o zamana ulaşana kadar döngüde kal.
+    while (clock() < baslangic_zamani + (milisaniye * CLOCKS_PER_SEC / 1000));
+}
+
+
+
+
+
+
+
+
+
+
 
 void Toll_random_choose(Toll* self_toll, Behind_Square* bs, Square square) {
     if (!self_toll || !bs) {
@@ -38,10 +63,9 @@ void Toll_random_choose(Toll* self_toll, Behind_Square* bs, Square square) {
                     self_toll->cars[i] = new_car;
                     placed = 1;
 
-
+                    wait_ms(self_toll->cars[i]->busyTime);
                    //hemen de kurtulmalı hemen olmazsa bile ardından
 
-                    ///bla bla bekle
                     
                     Toll_car_return(self_toll);
                     break;
@@ -61,7 +85,7 @@ void Toll_random_choose(Toll* self_toll, Behind_Square* bs, Square square) {
                     self_toll->minibuses[i] = new_minibus;
                     placed = 1;
                     
-                    
+                    wait_ms(self_toll->minibuses[i]->busyTime);
                     Toll_minibus_return(self_toll);
                     break;
 
@@ -81,7 +105,7 @@ void Toll_random_choose(Toll* self_toll, Behind_Square* bs, Square square) {
                     placed = 1;
                     
                     
-
+                    wait_ms(self_toll->trucks[i]->busyTime);
                     Toll_truck_return(self_toll);
                     break;
 

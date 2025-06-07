@@ -14,10 +14,11 @@ const int carsLength=1;
 const int minibusesLength=1;
 const int trucksLength=1;
 struct Toll {
-    Car* cars[carsLength];
-    Minibus* minibuses[minibusesLength];
-    Truck* trucks[trucksLength];
+    Car* cars[40];
+    Minibus* minibuses[20];
+    Truck* trucks[12];
 
+   
 };
 // Forward declaration (opaque pointer) - internal structure is hidden
 typedef struct Toll Toll;

@@ -14,18 +14,22 @@
 #include "behind_square.h"
 
 
-bool isAllEmpty=true;
-Car* carWillBeSend;
-Minibus* minibusWillBeSend;
-Truck* truckWillBeSend;
+
+Car* carWillBeSent;
+Minibus* minibusWillBeSent;
+Truck* truckWillBeSent;
+
+int carsLength = 40;
+int minibusesLength = 20;
+int trucksLength = 12;
 
 Car* Behind_Square_Car_Left(Behind_Square* self){
-    
+    bool isAllEmpty=true;
     
     if (!self ) {
         return NULL;
     }
-    isAllEmpty=true;
+    
     for(int i=0;i<carsLength;i++){
         if(self->cars[i]!=NULL){
             isAllEmpty=false;
@@ -42,14 +46,14 @@ Car* Behind_Square_Car_Left(Behind_Square* self){
     while(self->cars[vehicle_type_choice]==NULL&& !isAllEmpty) {
         vehicle_type_choice = rand() % carsLength;
     }
-    carWillBeSend=self->cars[vehicle_type_choice];
+    carWillBeSent=self->cars[vehicle_type_choice];
     self->cars[vehicle_type_choice]=NULL;
-    return carWillBeSend; //mantık hatası var ayrılırken boşaltmam lazım orayı
+    return carWillBeSent; //mantık hatası var ayrılırken boşaltmam lazım orayı
     
 }
 
 Minibus* Behind_Square_Minibus_Left(Behind_Square* self){
-    
+    bool isAllEmpty=true;
     if (!self ) {
         return NULL;
     }
@@ -71,13 +75,13 @@ Minibus* Behind_Square_Minibus_Left(Behind_Square* self){
     while(self->minibuses[vehicle_type_choice]==NULL&& !isAllEmpty) {
         vehicle_type_choice = rand() % minibusesLength;
     }
-    minibusWillBeSend=self->minibuses[vehicle_type_choice];
+    minibusWillBeSent=self->minibuses[vehicle_type_choice];
     self->minibuses[vehicle_type_choice]=NULL;
-    return minibusWillBeSend; //mantık hatası var ayrılırken boşaltmam lazım orayı
+    return minibusWillBeSent; //mantık hatası var ayrılırken boşaltmam lazım orayı
 }
 
 Truck* Behind_Square_Truck_Left(Behind_Square* self){
-
+    bool isAllEmpty=true;
     if (!self ) {
         return NULL;
     }
@@ -99,7 +103,7 @@ Truck* Behind_Square_Truck_Left(Behind_Square* self){
     while(self->trucks[vehicle_type_choice]==NULL&& !isAllEmpty) {
         vehicle_type_choice = rand() % trucksLength;
     }
-    truckWillBeSend=self->trucks[vehicle_type_choice];
+    truckWillBeSent=self->trucks[vehicle_type_choice];
     self->trucks[vehicle_type_choice]=NULL;
-    return truckWillBeSend; //mantık hatası var ayrılırken boşaltmam lazım orayı
+    return truckWillBeSent; //mantık hatası var ayrılırken boşaltmam lazım orayı
 }

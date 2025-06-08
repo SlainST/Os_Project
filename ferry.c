@@ -5,6 +5,7 @@
 #include <ctype.h>
 #include <time.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "car.h"
 #include "minibus.h"
@@ -15,11 +16,15 @@
 #include "behind_square.h"
 
 
-bool isAllEmpty=false;
+bool isAllEmpty=true;
 
-Car* carWillBeSend;
-Minibus* minibusWillBeSend;
-Truck* truckWillBeSend;
+const int lengthOfCars=20;
+const int lengthOfMinibuses=10;
+const int lengthOfTrucks=6;
+int count_car=0;
+int count_minibus=0;
+int count_truck=0;
+
 
 void Ferry_init(Ferry* fe){
 
@@ -29,11 +34,18 @@ void Ferry_init(Ferry* fe){
     fe->inWhichSquare=rand()%2;
 }
 
+void wait_mses(long milisaniye) {
+    clock_t baslangic_zamani = clock();
+
+    // İstenen milisaniye süresine karşılık gelen clock tick sayısını hesapla
+    // ve o zamana ulaşana kadar döngüde kal.
+    while (clock() < baslangic_zamani + (milisaniye * CLOCKS_PER_SEC / 1000));
+}
+
 void Take_vehicles(Ferry* fe, Square* square0){
     int which=rand()%3;
-    int count_car=0;
-    int count_minibus=0;
-    int count_truck=0;
+    
+    wait_mses(300);
     while (fe->usedCapacity<20){
         
         if(which==0){
@@ -51,11 +63,11 @@ void Take_vehicles(Ferry* fe, Square* square0){
                 //wait 300ms for after
             }
             if(isAllEmpty==true){
-                if(fe->isWentToAcross=true){
+                if(fe->isWentToAcross==true){
                     fe->isWentToAcross=false;
                 }
 
-                if(fe->isWentToAcross=false){
+                if(fe->isWentToAcross==false){
                     fe->isWentToAcross=true;
                 }
             }
@@ -70,6 +82,7 @@ void Take_vehicles(Ferry* fe, Square* square0){
 
 
                     fe->usedCapacity=fe->usedCapacity+1;
+                    count_car++;
                     if(fe->capacity<fe->usedCapacity+1){
                         break;
                     }
@@ -101,7 +114,7 @@ void Take_vehicles(Ferry* fe, Square* square0){
                     }
                     fe->minibusses[fe->usedCapacity]=Square_minibus_Left(square0);
 
-
+                    count_minibus++;
 
                     fe->usedCapacity=fe->usedCapacity+2;
                     if(fe->capacity<fe->usedCapacity+2){
@@ -133,7 +146,7 @@ void Take_vehicles(Ferry* fe, Square* square0){
                     }
                     fe->trucks[fe->usedCapacity]=Square_truck_Left(square0);
 
-
+                    count_truck++;
 
                     fe->usedCapacity=fe->usedCapacity+3;
                     if(fe->capacity<fe->usedCapacity+3){
@@ -150,7 +163,7 @@ void Take_vehicles(Ferry* fe, Square* square0){
 
 }
 
-void Pass_vehicles(Ferry* fe,Square* square0, Square* square1, Behind_Square* bs1, Behind_Square* bs2){
+void Pass_vehicles(Ferry* fe,Behind_Square* bs2){
     if(!fe->isWentToAcross){
         for(int i=0;i<lengthOfCars;i++){
             if(fe->cars[i]==NULL){

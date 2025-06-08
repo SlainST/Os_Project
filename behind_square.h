@@ -15,9 +15,9 @@
 #include "minibus.h"
 
 
-int carsLength=40;
-int minibusesLength=20;
-int trucksLength=12;
+extern int carsLength;
+extern int minibusesLength;
+extern int trucksLength;
 
 
 struct Behind_Square {

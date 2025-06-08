@@ -21,9 +21,9 @@ struct Behind_Square;
 #include "square.h"
 
 
-const int lengthOfCars=20;
-const int lengthOfMinibuses=10;
-const int lengthOfTrucks=6;
+extern const int lengthOfCars;
+extern const int lengthOfMinibuses;
+extern const int lengthOfTrucks;
 
 struct Ferry {
     int capacity;
@@ -42,6 +42,7 @@ void Ferry_init(Ferry* fe);
 
 void Take_vehicles(Ferry* fe,struct  Square* square0);
 
-void Pass_vehicles(Ferry* fe,struct Square* square1,struct Square* square2,struct Behind_Square* bs1,struct Behind_Square* bs2);
+void Pass_vehicles(Ferry* fe,struct Behind_Square* bs2);
+//void Pass_vehicles(Ferry* fe,struct Square* square1,struct Square* square2,struct Behind_Square* bs1,struct Behind_Square* bs2);
 
 #endif

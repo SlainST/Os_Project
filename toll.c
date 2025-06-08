@@ -16,9 +16,9 @@
 #include "behind_square.h"
 
 
-Car* carWillBeSend;
-Minibus* minibusWillBeSend;
-Truck* truckWillBeSend;
+Car* carWillBeSended;
+Minibus* minibusWillBeSended;
+Truck* truckWillBeSended;
 
 
 int i;
@@ -48,7 +48,7 @@ void wait_ms(long milisaniye) {
 
 
 //void Toll_random_choose(Toll* self_toll, Behind_Square* bs, Square square) {
-void Toll_random_choose(Toll* self_toll, Behind_Square* bs, struct Square* square) {    
+void Toll_random_choose(Toll* self_toll, Behind_Square* bs) {    
     if (!self_toll || !bs) {
         return;
     }
@@ -121,26 +121,26 @@ void Toll_random_choose(Toll* self_toll, Behind_Square* bs, struct Square* squar
 
 
 Car* Toll_car_return(Toll* self_toll){
-    carWillBeSend= self_toll->cars[i]; //hatalı kodlama değil çükü her return tolldan sonra çalışcak
+    carWillBeSended= self_toll->cars[i]; //hatalı kodlama değil çükü her return tolldan sonra çalışcak
                     
                     self_toll->cars[i]=NULL;
-                    return carWillBeSend;
+                    return carWillBeSended;
 
 
 }
 
 Minibus* Toll_minibus_return(Toll* self_toll){
-    minibusWillBeSend= self_toll->minibuses[i];
+    minibusWillBeSended= self_toll->minibuses[i];
                     
                     self_toll->minibuses[i]=NULL;
-                    return minibusWillBeSend;
+                    return minibusWillBeSended;
 
 }
 
 Truck* Toll_truck_return(Toll* self_toll){
 
-    truckWillBeSend= self_toll->trucks[i];
+    truckWillBeSended= self_toll->trucks[i];
                     
     self_toll->trucks[i]=NULL;
-    return truckWillBeSend;
+    return truckWillBeSended;
 }

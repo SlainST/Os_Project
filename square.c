@@ -17,7 +17,7 @@ Car* carWillBeSend;
 Minibus* minibusWillBeSend;
 Truck* truckWillBeSend;
 
-bool isAllEmpty=false;
+
 // void Square_load_ferry(Square* self, Toll* toll){
     
 // }
@@ -100,7 +100,7 @@ void Square_load(Square* self, Toll* toll){
 
 Car* Square_car_Left(Square* self){ //tolldaki hatalı kodlama olurdu çünkü her left loaddan sonra değil
 //ferry gerekli mi burda
-
+    bool isAllEmpty=true;
     if (!self ) {
         return NULL;
     }
@@ -110,7 +110,8 @@ Car* Square_car_Left(Square* self){ //tolldaki hatalı kodlama olurdu çünkü h
             break;
         }
         else{
-            isAllEmpty=true;
+            
+            
             
         }
         if(i == carsLength-1){ return NULL; }
@@ -129,6 +130,7 @@ Car* Square_car_Left(Square* self){ //tolldaki hatalı kodlama olurdu çünkü h
 }
 
 Minibus* Square_minibus_Left(Square* self){
+    bool isAllEmpty=true;
     if (!self ) {
         return NULL;
     }
@@ -138,7 +140,7 @@ Minibus* Square_minibus_Left(Square* self){
             break;
         }
         else{
-            isAllEmpty=true;
+            
             
         }
         if(i== minibusesLength-1){
@@ -158,6 +160,7 @@ Minibus* Square_minibus_Left(Square* self){
 
 }
 Truck* Square_truck_Left(Square* self){
+    bool isAllEmpty=true;
     if (!self ) {
         return NULL;
     }
@@ -167,7 +170,7 @@ Truck* Square_truck_Left(Square* self){
             break;
         }
         else{
-            isAllEmpty=true;
+            
             
         }
         if(i== trucksLength-1){

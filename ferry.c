@@ -24,6 +24,10 @@ void Ferry_init(Ferry* fe) {
     fe->isWentToAcross = false; // Feribotun yönünü belirtir
     fe->inWhichSquare = 0;
 
+    fe->car_count = 0;
+    fe->minibus_count = 0;
+    fe->truck_count = 0;
+    
     for(int i = 0; i < 40; i++) fe->cars[i] = NULL;
     for(int i = 0; i < 20; i++) fe->minibusses[i] = NULL;
     for(int i = 0; i < 12; i++) fe->trucks[i] = NULL;
@@ -298,7 +302,7 @@ void Take_vehicles(Ferry* fe, Square* square){
 
 void Pass_vehicles(Ferry* fe,Behind_Square* bs2){
     if(!fe->isWentToAcross){
-        for(int i=0;i<lengthOfCars;i++){
+        for(int i=0;i<MAX_CARS;i++){
             if(fe->cars[i]==NULL){
             }
             else{
@@ -314,7 +318,7 @@ void Pass_vehicles(Ferry* fe,Behind_Square* bs2){
             }
 
         }
-        for(int i=0;i<lengthOfMinibuses;i++){
+        for(int i=0;i<MAX_MINIBUSES;i++){
             if(fe->minibusses[i]==NULL){
             }
             else{
@@ -330,7 +334,7 @@ void Pass_vehicles(Ferry* fe,Behind_Square* bs2){
             }
 
         }
-        for(int i=0;i<lengthOfTrucks;i++){
+        for(int i=0;i<MAX_TRUCKS;i++){
             if(fe->trucks[i]==NULL){
             }
             else{
@@ -352,7 +356,7 @@ void Pass_vehicles(Ferry* fe,Behind_Square* bs2){
     
 
     if(fe->isWentToAcross){
-        for(int i=0;i<lengthOfCars;i++){
+        for(int i=0;i<MAX_CARS;i++){
             if(fe->cars[i]==NULL){
             }
             else{
@@ -368,7 +372,7 @@ void Pass_vehicles(Ferry* fe,Behind_Square* bs2){
             }
 
         }
-        for(int i=0;i<lengthOfMinibuses;i++){
+        for(int i=0;i<MAX_MINIBUSES;i++){
             if(fe->minibusses[i]==NULL){
             }
             else{
@@ -382,7 +386,7 @@ void Pass_vehicles(Ferry* fe,Behind_Square* bs2){
             }
 
         }
-        for(int i=0;i<lengthOfTrucks;i++){
+        for(int i=0;i<MAX_TRUCKS;i++){
             if(fe->trucks[i]==NULL){
             }
             else{

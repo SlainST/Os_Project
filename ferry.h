@@ -20,10 +20,13 @@ struct Behind_Square;
 #include "truck.h"
 #include "square.h"
 
+#define MAX_CARS 20
+#define MAX_MINIBUSES 10
+#define MAX_TRUCKS 6
 
-const int lengthOfCars;
-const int lengthOfMinibuses;
-const int lengthOfTrucks;
+extern const int lengthOfCars;
+extern const int lengthOfMinibuses;
+extern const int lengthOfTrucks;
 
 struct Ferry {
     int capacity;
@@ -31,9 +34,13 @@ struct Ferry {
     bool inFirstRound;
     int usedCapacity;
     int inWhichSquare;
-    Car* cars[40];
-    Minibus* minibusses[20];
-    Truck* trucks[12];
+    Car* cars[20];
+    Minibus* minibusses[10];
+    Truck* trucks[6];
+
+    int car_count;
+    int minibus_count;
+    int truck_count;
 };
 
 typedef struct Ferry Ferry;

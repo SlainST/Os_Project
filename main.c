@@ -15,6 +15,12 @@
 #include "behind_square.h"
 #include "ferry.h"
 
+
+const int lengthOfCars = 40;
+const int lengthOfMinibuses = 20;
+const int lengthOfTrucks = 12;
+
+
 // Number of each vehicle type
 #define NUM_CARS 12
 #define NUM_MINIBUSES 10

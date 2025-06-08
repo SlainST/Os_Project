@@ -2,6 +2,9 @@
 #define SQUARE_H 
 
 
+struct Ferry;
+struct Toll;
+
 #define CARS_LENGTH 40
 #define MINIBUSES_LENGTH 20
 #define TRUCKS_LENGTH 12
@@ -34,16 +37,16 @@ struct Square {
 
 typedef struct Square Square;
     
-void Square_load(Square* self, Toll* toll);
+void Square_load(Square* self, struct Toll* toll);
 
 // void Square_load_ferry(Square* self, Ferry* ferry);
 
-Car* Square_car_Left(Square* self, Ferry* ferry);
+Car* Square_car_Left(Square* self,struct  Ferry* ferry);
 
 
-Minibus* Square_minibus_Left(Square* self, Ferry* ferry);
+Minibus* Square_minibus_Left(Square* self, struct Ferry* ferry);
 
 
-Truck* Square_truck_Left(Square* self, Ferry* ferry);
+Truck* Square_truck_Left(Square* self, struct Ferry* ferry);
 
 #endif 

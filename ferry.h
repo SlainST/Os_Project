@@ -2,6 +2,9 @@
 #ifndef FERRY_H
 #define FERRY_H
 
+struct Square;
+struct Behind_Square;
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
@@ -37,8 +40,8 @@ typedef struct Ferry Ferry;
 
 void Ferry_init(Ferry* fe);
 
-void Take_vehicles(Ferry* fe,Square* square);
+void Take_vehicles(Ferry* fe,struct  Square* square);
 
-void Pass_vehicles(Ferry* fe, Square* square1, Square* square2, Behind_Square* bs1, Behind_Square* bs2);
+void Pass_vehicles(Ferry* fe,struct Square* square1,struct Square* square2,struct Behind_Square* bs1,struct Behind_Square* bs2);
 
 #endif

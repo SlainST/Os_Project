@@ -1,6 +1,10 @@
 #ifndef TOLL_H
 #define TOLL_H
 
+
+struct Behind_Square;
+struct Square;
+
 #include "behind_square.h"
 
 
@@ -28,7 +32,7 @@ Toll* Toll_create_vehicle_arrays();
 void Toll_destroy_vehicle_arrays(Toll* toll); //examples
 
 
-void Toll_random_choose(Toll* toll_instance, Behind_Square* bs_instance, Square* square);
+void Toll_random_choose(Toll* toll_instance,struct Behind_Square* bs_instance, struct Square* square);
 Car* Toll_car_return(Toll* toll);
 Minibus* Toll_minibus_return(Toll* toll);
 Truck* Toll_truck_return(Toll* toll);

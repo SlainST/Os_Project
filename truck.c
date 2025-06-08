@@ -18,4 +18,9 @@ void Truck_init(Truck* t){
     t->busyTime=(rand() % 100) + 201;
     t->randomId=(rand() % 10000);
     t->timesWaited=0;
+    t->start_side = 0;
+    t->has_crossed_once = false;
+
+
+    printf("truck created: %d \n ",t->randomId);
 }

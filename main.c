@@ -32,9 +32,10 @@ typedef struct {
 } VehicleTracker;
 
 // All vehicles in simulation
-Car all_cars[NUM_CARS];
-Minibus all_minibuses[NUM_MINIBUSES];
-Truck all_trucks[NUM_TRUCKS];
+Car* all_cars[NUM_CARS];
+
+Minibus* all_minibuses[NUM_MINIBUSES];
+Truck* all_trucks[NUM_TRUCKS];
 
 // Track vehicles' locations
 VehicleTracker car_trackers[NUM_CARS];
@@ -87,35 +88,106 @@ void print_simulation_state() {
 
 // Check if all vehicles finished trips
 bool is_simulation_complete() {
-    int completed_vehicles = 0;
+    int completed_cars = 0;
     for (int i = 0; i < NUM_CARS; i++) {
-        if (car_trackers[i].trip_done) {
-            completed_vehicles++;
+        if (all_cars[i]->isCompleted) { 
+            completed_cars++;
         }
     }
-    return completed_vehicles == NUM_CARS;
-}
 
+    int completed_minibuses = 0;
+    for (int i = 0; i < NUM_MINIBUSES; i++) {
+        if (all_minibuses[i]->isCompleted) {
+            completed_minibuses++;
+        }
+    }
+
+    int completed_trucks = 0;
+    for (int i = 0; i < NUM_TRUCKS; i++) {
+        if (all_trucks[i]->isCompleted) {
+            completed_trucks++;
+        }
+    }
+
+    return (completed_cars == NUM_CARS) && 
+           (completed_minibuses == NUM_MINIBUSES) && 
+           (completed_trucks == NUM_TRUCKS);
+}
 // Set starting positions for vehicles
 void initialize_vehicles() {
+    
+    int starting_side = 0;
     for (int i = 0; i < NUM_CARS; i++) {
-        Car_init(&all_cars[i]);
-        int starting_side = rand() % 2;
+        all_cars[i] = malloc(sizeof(Car));
+        Car_init(all_cars[i]);
+        int starting_side = 0;
         car_trackers[i].start_side = starting_side;
         car_trackers[i].current_side = starting_side;
         car_trackers[i].trip_done = false;
 
         for (int j = 0; j < carsLength; j++) {
             if (behind_squares[starting_side].cars[j] == NULL) {
-                behind_squares[starting_side].cars[j] = &all_cars[i];
+                behind_squares[starting_side].cars[j] = all_cars[i];
                 break;
             }
         }
     }
+    for (int i = 0; i < NUM_MINIBUSES; i++) {
+        all_minibuses[i] = malloc(sizeof(Minibus));
+        Minibus_init(all_minibuses[i]);
+        int starting_side = 0;
+        minibus_trackers[i].start_side = starting_side;
+        minibus_trackers[i].current_side = starting_side;
+        minibus_trackers[i].trip_done = false;
+
+        for (int j = 0; j < minibusesLength; j++) {
+            if (behind_squares[starting_side].minibuses[j] == NULL) {
+                behind_squares[starting_side].minibuses[j] = all_minibuses[i];
+                break;
+            }
+        }
+    }
+    for (int i = 0; i < NUM_TRUCKS; i++) {
+        all_trucks[i] = malloc(sizeof(Truck));
+        Truck_init(all_trucks[i]);
+        
+        truck_trackers[i].start_side = starting_side;
+        truck_trackers[i].current_side = starting_side;
+        truck_trackers[i].trip_done = false;
+
+        for (int j = 0; j < trucksLength; j++) {
+            if (behind_squares[starting_side].trucks[j] == NULL) {
+                behind_squares[starting_side].trucks[j] = all_trucks[i];
+                break;
+            }
+        }
+    }
+
+
+
+   
 }
 
 int main() {
     srand(time(NULL));
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
 
     printf("Starting simulation...\n");
     memset(behind_squares, 0, sizeof(behind_squares));
@@ -134,16 +206,28 @@ int main() {
 
         printf("Vehicles moving through tolls...\n");
         for (int i = 0; i < TOTAL_TOLLS; i++) {
-            int side = i / NUM_TOLLS_PER_SIDE;
-            Toll_random_choose(&tolls[i], &behind_squares[side]);
+          
+            int side = i / NUM_TOLLS_PER_SIDE; 
+            
+           
+            Toll_random_choose(&tolls[i], &behind_squares[side]); 
+
+          
+            Square_load(&squares[side], &tolls[i]);
         }
-        
+
+
+
+
+
+
+
         int current_side = ferry.inWhichSquare;
         printf("Ferry at SIDE %d working\n", current_side);
         
         if (ferry.usedCapacity > 0) {
             printf("Unloading ferry at SIDE %d...\n", current_side);
-            Pass_vehicles(&ferry, &behind_squares[1]);
+            Pass_vehicles(&ferry, &behind_squares[current_side]); 
         }
 
         printf("Loading ferry from SIDE %d...\n", current_side);

@@ -18,6 +18,10 @@ void Car_init(Car* c){
     c->busyTime=(rand() % 100) + 1;
     c->timesWaited=0;
     c->randomId=(rand() % 10000);
-    
+    c->start_side = 0;
+    c->has_crossed_once = false;
+ 
+
+    printf("car created: %d \n ",c->randomId);
 
 }

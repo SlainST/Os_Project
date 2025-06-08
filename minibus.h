@@ -20,8 +20,12 @@ struct Minibus{
     int timesWaited;
     int busyTime;
     bool isStartingSide;
-    bool isCompleted;
+    int start_side;         
+    bool has_crossed_once;  
+    bool isCompleted;  
     int randomId;
+
+
 };
 
 typedef struct Minibus Minibus;

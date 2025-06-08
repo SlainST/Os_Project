@@ -18,5 +18,10 @@ void Minibus_init(Minibus* m){
     m->busyTime=(rand() % 100) + 101;
     m->timesWaited=0;
     m->randomId=(rand() % 10000);
+    m->start_side = 0;
+    m->has_crossed_once = false;
+  
+
+    printf("minibus created: %d \n ",m->randomId);
 
 }

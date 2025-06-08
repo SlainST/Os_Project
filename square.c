@@ -25,7 +25,7 @@ Truck* truckWillBeSend;
 
 
 void Square_load(Square* self, Toll* toll){
-    if ( self || !toll) {
+    if (!self || !toll) {
         return;
     }
 

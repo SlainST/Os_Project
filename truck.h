@@ -16,7 +16,9 @@ struct Truck{
     int size;
     int busyTime;
     bool isStartingSide;
-    bool isCompleted;
+    int start_side;         
+    bool has_crossed_once;  
+    bool isCompleted;  
     int timesWaited;
     int randomId;
 };

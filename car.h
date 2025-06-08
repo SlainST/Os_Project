@@ -16,8 +16,12 @@ struct Car {
     int size ;
     int busyTime;
     bool isStartingSide;
-    bool isCompleted;
-    int randomId;
+    int start_side;         
+    bool has_crossed_once;  
+    bool isCompleted; 
+
+    int randomId;     
+    
 };
 
 typedef struct Car Car;

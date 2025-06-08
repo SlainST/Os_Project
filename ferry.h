@@ -21,9 +21,9 @@ struct Behind_Square;
 #include "square.h"
 
 
-extern const int lengthOfCars;
-extern const int lengthOfMinibuses;
-extern const int lengthOfTrucks;
+const int lengthOfCars;
+const int lengthOfMinibuses;
+const int lengthOfTrucks;
 
 struct Ferry {
     int capacity;

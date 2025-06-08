@@ -68,7 +68,7 @@ void Toll_random_choose(Toll* self_toll, Behind_Square* bs) {
                    //hemen de kurtulmalı hemen olmazsa bile ardından
 
                     
-                    Toll_car_return(self_toll);
+                    
                     break;
 
 
@@ -87,7 +87,7 @@ void Toll_random_choose(Toll* self_toll, Behind_Square* bs) {
                     placed = 1;
                     
                     wait_ms(self_toll->minibuses[i]->busyTime);
-                    Toll_minibus_return(self_toll);
+                   
                     break;
 
                     
@@ -107,7 +107,7 @@ void Toll_random_choose(Toll* self_toll, Behind_Square* bs) {
                     
                     
                     wait_ms(self_toll->trucks[i]->busyTime);
-                    Toll_truck_return(self_toll);
+                    
                     break;
 
 
@@ -121,26 +121,49 @@ void Toll_random_choose(Toll* self_toll, Behind_Square* bs) {
 
 
 Car* Toll_car_return(Toll* self_toll){
-    carWillBeSended= self_toll->cars[i]; //hatalı kodlama değil çükü her return tolldan sonra çalışcak
-                    
-                    self_toll->cars[i]=NULL;
-                    return carWillBeSended;
+    if (!self_toll) return NULL;
 
-
-}
-
-Minibus* Toll_minibus_return(Toll* self_toll){
-    minibusWillBeSended= self_toll->minibuses[i];
-                    
-                    self_toll->minibuses[i]=NULL;
-                    return minibusWillBeSended;
-
+    for (int i = 0; i < carsLength; ++i) { 
+        if (self_toll->cars[i] != NULL) {
+            carWillBeSended = self_toll->cars[i]; 
+            self_toll->cars[i] = NULL; 
+            return carWillBeSended;
+        }
+    }
+    return NULL; 
 }
 
 Truck* Toll_truck_return(Toll* self_toll){
+    if (!self_toll) return NULL;
 
-    truckWillBeSended= self_toll->trucks[i];
-                    
-    self_toll->trucks[i]=NULL;
-    return truckWillBeSended;
+    for (int i = 0; i < trucksLength; ++i) { 
+        if (self_toll->trucks[i] != NULL) {
+            truckWillBeSended = self_toll->trucks[i]; 
+            self_toll->trucks[i] = NULL; 
+            return truckWillBeSended;
+        }
+    }
+    return NULL; 
 }
+
+
+Minibus* Toll_minibus_return(Toll* self_toll){
+    if (!self_toll) return NULL;
+
+    for (int i = 0; i < minibusesLength; ++i) { 
+        if (self_toll->minibuses[i] != NULL) {
+            minibusWillBeSended = self_toll->minibuses[i]; 
+            self_toll->minibuses[i] = NULL; 
+            return minibusWillBeSended;
+        }
+    }
+    return NULL; 
+}
+
+// Truck* Toll_truck_return(Toll* self_toll){
+
+//     truckWillBeSended= self_toll->trucks[i];
+                    
+//     self_toll->trucks[i]=NULL;
+//     return truckWillBeSended;
+// }

@@ -15,6 +15,7 @@
 #include "minibus.h"
 #include "car.h"
 #include "truck.h"
+#include "square.h"
 
 
 const int lengthOfCars=20;
@@ -36,8 +37,8 @@ typedef struct Ferry Ferry;
 
 void Ferry_init(Ferry* fe);
 
-void Take_vehicles(Ferry* fe,Square square);
+void Take_vehicles(Ferry* fe,Square* square);
 
-void Pass_vehicles(Ferry* fe, Square square1, Square square2, Behind_Square bs1, Behind_Square bs2);
+void Pass_vehicles(Ferry* fe, Square* square1, Square* square2, Behind_Square* bs1, Behind_Square* bs2);
 
 #endif

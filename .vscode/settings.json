@@ -1,7 +1,7 @@
 {
     // You might have other settings here
     "code-runner.executorMap": {
-        "c": "cd $dir && gcc main.c car.c minibus.c truck.c -o main -Wall -Wextra -g && $dir./main"
+        "c": "cd $dir && gcc main.c ferry.c toll.c car.c minibus.c truck.c square.c behind_square.c -o main -Wall -Wextra -g && $dir./main"
     },
     "code-runner.runInTerminal": true,
     "files.associations": {
@@ -14,6 +14,8 @@
         "minibus.h": "c",
         "stdbool.h": "c",
         "behind_square.h": "c",
-        "random": "c"
+        "random": "c",
+        "toll.h":"c",
+        "ferry.h":"c",
     } // This is highly recommended to see output properly
 }

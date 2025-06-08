@@ -1,18 +1,18 @@
 #ifndef TOLL_H
 #define TOLL_H
 
-#include <behind_square.h>
+#include "behind_square.h"
 
 
-#include <truck.h>
-#include <car.h>
-#include <minibus.h>
-#include <square.h>
+#include "truck.h"
+#include "car.h"
+#include "minibus.h"
+#include "square.h"
 
 
-const int carsLength=1;
-const int minibusesLength=1;
-const int trucksLength=1;
+const int carsLengthh=1;
+const int minibusesLengthh=1;
+const int trucksLengthh=1;
 struct Toll {
     Car* cars[40];
     Minibus* minibuses[20];

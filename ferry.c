@@ -6,13 +6,13 @@
 #include <time.h>
 #include <stdlib.h>
 
-#include <car.h>
-#include <minibus.h>
-#include <truck.h>
+#include "car.h"
+#include "minibus.h"
+#include "truck.h"
 
 #include "ferry.h"
-#include <square.h>
-#include <behind_square.h>
+#include "square.h"
+#include "behind_square.h"
 
 
 bool isAllEmpty=false;

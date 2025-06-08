@@ -17,11 +17,11 @@
 #include <stdlib.h>
 
 
-#include <truck.h>
-#include <car.h>
-#include <minibus.h>
-#include <toll.h>
-#include <ferry.h>
+#include "truck.h"
+#include "car.h"
+#include "minibus.h"
+#include "toll.h"
+#include "ferry.h"
 
 
 struct Square {
@@ -31,9 +31,7 @@ struct Square {
 
    
 };
-carsLength=40;
-minibusesLength=20;
-trucksLength=12;
+
 typedef struct Square Square;
     
 void Square_load(Square* self, Toll* toll);

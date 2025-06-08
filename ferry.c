@@ -29,7 +29,7 @@ void Ferry_init(Ferry* fe){
     fe->inWhichSquare=rand()%2;
 }
 
-void Take_vehicles(Ferry* fe, Square* square){
+void Take_vehicles(Ferry* fe, Square* square0){
     int which=rand()%3;
     int count_car=0;
     int count_minibus=0;
@@ -40,7 +40,7 @@ void Take_vehicles(Ferry* fe, Square* square){
             //skip if 
             isAllEmpty=true;
             for(int i=0; i<CARS_LENGTH;i++){
-                if(square->cars[i]!=NULL){
+                if(square0->cars[i]!=NULL){
                     isAllEmpty=false;
                     break;
                 }
@@ -50,7 +50,7 @@ void Take_vehicles(Ferry* fe, Square* square){
                 
                 //wait 300ms for after
             }
-            if(isAllEmpty=true){
+            if(isAllEmpty==true){
                 if(fe->isWentToAcross=true){
                     fe->isWentToAcross=false;
                 }
@@ -65,8 +65,8 @@ void Take_vehicles(Ferry* fe, Square* square){
                         break;
                     }
                     
-                    fe->minibusses[fe->usedCapacity]=Behind_Square_Truck_Left(sqrt);
-
+                    fe->cars[fe->usedCapacity]=Square_car_Left(square0);
+                    //count car ekleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 
 
                     fe->usedCapacity=fe->usedCapacity+1;
@@ -81,7 +81,7 @@ void Take_vehicles(Ferry* fe, Square* square){
         if (which == 1) {
             isAllEmpty=true;
             for(int i=0; i<MINIBUSES_LENGTH;i++){
-                if(square->minibuses[i]!=NULL){
+                if(square0->minibuses[i]!=NULL){
                     isAllEmpty=false;
                     break;
                 }
@@ -91,7 +91,7 @@ void Take_vehicles(Ferry* fe, Square* square){
                 
                 //wait 300ms for after
             }
-            if(isAllEmpty=true){
+            if(isAllEmpty==true){
                 return;
             }
             else{
@@ -99,7 +99,7 @@ void Take_vehicles(Ferry* fe, Square* square){
                     if(fe->capacity<fe->usedCapacity+2){
                         break;
                     }
-                    fe->minibusses[fe->usedCapacity]=Behind_Square_Minibus_Left(sqrt);
+                    fe->minibusses[fe->usedCapacity]=Square_minibus_Left(square0);
 
 
 
@@ -113,7 +113,7 @@ void Take_vehicles(Ferry* fe, Square* square){
         if (which == 2) {
             isAllEmpty=true;
             for(int i=0; i<TRUCKS_LENGTH;i++){
-                if(square->trucks[i]!=NULL){
+                if(square0->trucks[i]!=NULL){
                     isAllEmpty=false;
                     break;
                 }
@@ -123,7 +123,7 @@ void Take_vehicles(Ferry* fe, Square* square){
                 
                 //wait 300ms for after
             }
-            if(isAllEmpty=true){
+            if(isAllEmpty==true){
                 return;
             }
             else{
@@ -131,7 +131,7 @@ void Take_vehicles(Ferry* fe, Square* square){
                     if(fe->capacity<fe->usedCapacity+3){
                         break;
                     }
-                    fe->trucks[fe->usedCapacity]=Behind_Square_Truck_Left(sqrt);
+                    fe->trucks[fe->usedCapacity]=Square_truck_Left(square0);
 
 
 
@@ -213,7 +213,7 @@ void Pass_vehicles(Ferry* fe,Square* square0, Square* square1, Behind_Square* bs
                 for(int j=0;j<CARS_LENGTH;j++){
                     
                     printf(fe->cars[i]->randomId+"completed");
-                    printf(fe->cars[i]->isCompleted);
+                    fe->cars[i]->isCompleted=true;
                     fe->cars[i]=NULL;
                     
                     
@@ -228,7 +228,7 @@ void Pass_vehicles(Ferry* fe,Square* square0, Square* square1, Behind_Square* bs
             else{
                 for(int j=0;j<MINIBUSES_LENGTH;j++){
                     printf(fe->minibusses[i]->randomId+"completed");
-                    printf(fe->minibusses[i]->isCompleted);
+                    fe->minibusses[i]->isCompleted=true;
                     fe->minibusses[i]=NULL;
                     
             
@@ -242,7 +242,7 @@ void Pass_vehicles(Ferry* fe,Square* square0, Square* square1, Behind_Square* bs
             else{
                 for(int j=0;j<TRUCKS_LENGTH;j++){
                     printf(fe->trucks[i]->randomId+"completed");
-                    printf(fe->trucks[i]->isCompleted);
+                    fe->trucks[i]->isCompleted=true;
                     fe->trucks[i]=NULL;
                     
             

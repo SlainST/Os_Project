@@ -98,11 +98,11 @@ void Square_load(Square* self, Toll* toll){
 
 
 
-Car* Square_car_Left(Square* self, Ferry* ferry){ //tolldaki hatalı kodlama olurdu çünkü her left loaddan sonra değil
+Car* Square_car_Left(Square* self){ //tolldaki hatalı kodlama olurdu çünkü her left loaddan sonra değil
 //ferry gerekli mi burda
 
     if (!self ) {
-        return;
+        return NULL;
     }
     for(int i=0;i<carsLength;i++){
         if(self->cars[i]!=NULL){
@@ -113,29 +113,27 @@ Car* Square_car_Left(Square* self, Ferry* ferry){ //tolldaki hatalı kodlama olu
             isAllEmpty=true;
             
         }
-        if(i== carsLength-1){
-            return;
-        }
+        if(i == carsLength-1){ return NULL; }
     }
 
-    int vehicle_type_choice = rand() % minibusesLength;
+    int vehicle_type_choice = rand() % carsLength;//hataaaaaaaaaaaaaaaaaaaaaaaa
 
-    while(self->minibuses[vehicle_type_choice]==NULL&& !isAllEmpty) {
-        vehicle_type_choice = rand() % minibusesLength;
+    while(self->cars[vehicle_type_choice]==NULL&& !isAllEmpty) {
+        vehicle_type_choice = rand() % carsLength;
     }
-    carWillBeSend=self->minibuses[vehicle_type_choice];
-    self->minibuses[vehicle_type_choice]=NULL;
+    carWillBeSend=self->cars[vehicle_type_choice];
+    self->cars[vehicle_type_choice]=NULL;
     return carWillBeSend;
 
 
 }
 
-Minibus* Square_minibus_Left(Square* self, Ferry* ferry){
+Minibus* Square_minibus_Left(Square* self){
     if (!self ) {
-        return;
+        return NULL;
     }
-    for(int i=0;i<carsLength;i++){
-        if(self->cars[i]!=NULL){
+    for(int i=0;i<minibusesLength;i++){
+        if(self->minibuses[i]!=NULL){
             isAllEmpty=false;
             break;
         }
@@ -143,8 +141,8 @@ Minibus* Square_minibus_Left(Square* self, Ferry* ferry){
             isAllEmpty=true;
             
         }
-        if(i== carsLength-1){
-            return;
+        if(i== minibusesLength-1){
+            return NULL;
         }
     }
 
@@ -153,18 +151,18 @@ Minibus* Square_minibus_Left(Square* self, Ferry* ferry){
     while(self->minibuses[vehicle_type_choice]==NULL&& !isAllEmpty) {
         vehicle_type_choice = rand() % minibusesLength;
     }
-    carWillBeSend=self->minibuses[vehicle_type_choice];
+    minibusWillBeSend=self->minibuses[vehicle_type_choice];
     self->minibuses[vehicle_type_choice]=NULL;
-    return carWillBeSend;
+    return minibusWillBeSend;
 
 
 }
-Truck* Square_truck_Left(Square* self, Ferry* ferry){
+Truck* Square_truck_Left(Square* self){
     if (!self ) {
-        return;
+        return NULL;
     }
-    for(int i=0;i<carsLength;i++){
-        if(self->cars[i]!=NULL){
+    for(int i=0;i<trucksLength;i++){
+        if(self->trucks[i]!=NULL){
             isAllEmpty=false;
             break;
         }
@@ -172,19 +170,19 @@ Truck* Square_truck_Left(Square* self, Ferry* ferry){
             isAllEmpty=true;
             
         }
-        if(i== carsLength-1){
-            return;
+        if(i== trucksLength-1){
+            return NULL;
         }
     }
 
-    int vehicle_type_choice = rand() % minibusesLength;
+    int vehicle_type_choice = rand() % trucksLength;
 
-    while(self->minibuses[vehicle_type_choice]==NULL&& !isAllEmpty) {
-        vehicle_type_choice = rand() % minibusesLength;
+    while(self->trucks[vehicle_type_choice]==NULL&& !isAllEmpty) {
+        vehicle_type_choice = rand() % trucksLength;
     }
-    carWillBeSend=self->minibuses[vehicle_type_choice];
-    self->minibuses[vehicle_type_choice]=NULL;
-    return carWillBeSend;
+    truckWillBeSend=self->trucks[vehicle_type_choice];
+    self->trucks[vehicle_type_choice]=NULL;
+    return truckWillBeSend;
 
 
 }

@@ -23,7 +23,7 @@ Car* Behind_Square_Car_Left(Behind_Square* self){
     
     
     if (!self ) {
-        return;
+        return NULL;
     }
     isAllEmpty=true;
     for(int i=0;i<carsLength;i++){
@@ -34,7 +34,7 @@ Car* Behind_Square_Car_Left(Behind_Square* self){
         else{    
         }
         if(i== carsLength-1  && isAllEmpty){
-            return;
+            return NULL;
         }
     }
     int vehicle_type_choice = rand() % carsLength;
@@ -51,7 +51,7 @@ Car* Behind_Square_Car_Left(Behind_Square* self){
 Minibus* Behind_Square_Minibus_Left(Behind_Square* self){
     
     if (!self ) {
-        return;
+        return NULL;
     }
     for(int i=0;i<minibusesLength;i++){
         if(self->minibuses[i]!=NULL){
@@ -63,7 +63,7 @@ Minibus* Behind_Square_Minibus_Left(Behind_Square* self){
             
         }
         if(i== minibusesLength-1 && isAllEmpty){
-            return;
+            return NULL;
         }
     }
     int vehicle_type_choice = rand() % minibusesLength;
@@ -79,7 +79,7 @@ Minibus* Behind_Square_Minibus_Left(Behind_Square* self){
 Truck* Behind_Square_Truck_Left(Behind_Square* self){
 
     if (!self ) {
-        return;
+        return NULL;
     }
     for(int i=0;i<trucksLength;i++){
         if(self->trucks[i]!=NULL){
@@ -91,7 +91,7 @@ Truck* Behind_Square_Truck_Left(Behind_Square* self){
             
         }
         if(i== trucksLength-1 && isAllEmpty){
-            return;
+            return NULL;
         }
     }
     int vehicle_type_choice = rand() % trucksLength;

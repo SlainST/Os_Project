@@ -47,7 +47,8 @@ void wait_ms(long milisaniye) {
 
 
 
-void Toll_random_choose(Toll* self_toll, Behind_Square* bs, Square square) {
+//void Toll_random_choose(Toll* self_toll, Behind_Square* bs, Square square) {
+void Toll_random_choose(Toll* self_toll, Behind_Square* bs, struct Square* square) {    
     if (!self_toll || !bs) {
         return;
     }

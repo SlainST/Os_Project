@@ -40,7 +40,7 @@ typedef struct Ferry Ferry;
 
 void Ferry_init(Ferry* fe);
 
-void Take_vehicles(Ferry* fe,struct  Square* square);
+void Take_vehicles(Ferry* fe,struct  Square* square0);
 
 void Pass_vehicles(Ferry* fe,struct Square* square1,struct Square* square2,struct Behind_Square* bs1,struct Behind_Square* bs2);
 

@@ -41,12 +41,12 @@ void Square_load(Square* self, struct Toll* toll);
 
 // void Square_load_ferry(Square* self, Ferry* ferry);
 
-Car* Square_car_Left(Square* self,struct  Ferry* ferry);
+Car* Square_car_Left(Square* self);
 
 
-Minibus* Square_minibus_Left(Square* self, struct Ferry* ferry);
+Minibus* Square_minibus_Left(Square* self);
 
 
-Truck* Square_truck_Left(Square* self, struct Ferry* ferry);
+Truck* Square_truck_Left(Square* self);
 
 #endif 

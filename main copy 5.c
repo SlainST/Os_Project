@@ -137,58 +137,6 @@ void initialize_vehicles() {
         }
     }
 }
-void process_all_vehicles_through_tolls(int side_index) {
-    Behind_Square* bs = &behind_squares[side_index];
-    Square* sq = &squares[side_index];
-    Toll* toll_a = &tolls[side_index * 2];
-    Toll* toll_b = &tolls[side_index * 2 + 1];
-
-    // Otomobilleri işle
-    for (int i = 0; i < carsLength; i++) {
-        if (bs->cars[i] != NULL) {
-            // Basitlik adına, rastgele bir gişe seçelim.
-            // Gerçekte HGS/OGS bakiyesi kontrolü de burada yapılabilir.
-            wait_ms(bs->cars[i]->busyTime); // Gişedeki işlem süresi
-            
-            // Aracı Square'e taşı
-            for (int j = 0; j < CARS_LENGTH; j++) {
-                if (sq->cars[j] == NULL) {
-                    sq->cars[j] = bs->cars[i];
-                    bs->cars[i] = NULL; // Eski yerini boşalt
-                    break;
-                }
-            }
-        }
-    }
-
-    // Minibüsleri işle
-    for (int i = 0; i < minibusesLength; i++) {
-        if (bs->minibuses[i] != NULL) {
-            wait_ms(bs->minibuses[i]->busyTime);
-            for (int j = 0; j < MINIBUSES_LENGTH; j++) {
-                if (sq->minibuses[j] == NULL) {
-                    sq->minibuses[j] = bs->minibuses[i];
-                    bs->minibuses[i] = NULL;
-                    break;
-                }
-            }
-        }
-    }
-
-    // Kamyonları işle
-    for (int i = 0; i < trucksLength; i++) {
-        if (bs->trucks[i] != NULL) {
-            wait_ms(bs->trucks[i]->busyTime);
-            for (int j = 0; j < TRUCKS_LENGTH; j++) {
-                if (sq->trucks[j] == NULL) {
-                    sq->trucks[j] = bs->trucks[i];
-                    bs->trucks[i] = NULL;
-                    break;
-                }
-            }
-        }
-    }
-}
 
 int main() {
     srand(time(NULL));
@@ -208,29 +156,28 @@ int main() {
     while (!is_simulation_complete() && rounds < 100) {
         printf("\n>>> ROUND %d <<<\n", ++rounds);
 
+        printf("Vehicles moving through tolls...\n");
+        for (int i = 0; i < TOTAL_TOLLS; i++) {
+            int side = i / NUM_TOLLS_PER_SIDE;
+            Toll_random_choose(&tolls[i], &behind_squares[side]);
+            Square_load(&squares[side], &tolls[i]);
+        }
+
         int current_side = ferry.inWhichSquare;
         int other_side = 1 - current_side;
-        printf("Ferry is at SIDE %d.\n", current_side);
+        printf("Ferry at SIDE %d is working.\n", current_side);
 
-        // 1. Adım: Feribot doluysa, araçları indir.
         if (ferry.usedCapacity > 0) {
             printf("Unloading ferry at SIDE %d...\n", current_side);
             Pass_vehicles(&ferry, &behind_squares[current_side]);
-            print_simulation_state(); // Durumu gör
         }
         
-        // 2. Adım: Mevcut yakadaki tüm araçları gişelerden geçir ve meydana taşı.
-        printf("Vehicles at SIDE %d moving through tolls to the waiting square...\n", current_side);
-        process_all_vehicles_through_tolls(current_side);
-        print_simulation_state(); // Durumu gör
-
-        // 3. Adım: Feribotu verimli bir şekilde doldur.
         printf("Loading ferry from SIDE %d...\n", current_side);
         Take_vehicles(&ferry, &squares[current_side]);
         
-        // 4. Adım: Feribot hareket mantığı.
-        // - Yolcusu varsa hareket eder.
-        // - Yolcusu yoksa VE bulunduğu yakada hiç araç kalmadıysa AMA karşı yakada araç varsa, boş olarak karşıya gider.
+        // Feribot hareket mantığı:
+        // 1. Doluysa hareket et.
+        // 2. Boşsa, AMA bulunduğu yakada HİÇ araç kalmadıysa VE karşı yakada araç varsa, hareket et.
         if (ferry.usedCapacity > 0 || (!is_any_vehicle_on_side(current_side) && is_any_vehicle_on_side(other_side))) {
             printf("Ferry is moving to SIDE %d.\n", other_side);
             ferry.inWhichSquare = other_side;
@@ -239,7 +186,7 @@ int main() {
         }
 
         print_simulation_state();
-        sleep(1); // Her turun sonunda bekleme
+        sleep(1);
     }
 
     printf("\n======================================================\n");

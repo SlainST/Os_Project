@@ -15,7 +15,8 @@
         "stdbool.h": "c",
         "behind_square.h": "c",
         "random": "c",
-        "toll.h":"c",
-        "ferry.h":"c",
+        "toll.h": "c",
+        "ferry.h": "c",
+        "vector": "c"
     } // This is highly recommended to see output properly
 }

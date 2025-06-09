@@ -45,51 +45,42 @@ void wait_mses(long milisaniye) {
 
 void Take_vehicles(Ferry* fe, Square* square) {
     if (!fe || !square) return;
+    
+    wait_mses(300); // İsteğin üzerine yükleme başında 300ms bekleme
 
-    wait_mses(300); // Yükleme başlangıcındaki bekleme süresi korunuyor.
-
+    // Döngü, feribot dolana veya meydan tamamen boşalana kadar devam eder
     while (fe->usedCapacity < fe->capacity) {
-        bool vehicle_loaded_in_this_iteration = false;
-
-        // Her iterasyonda farklı bir araç tipini önceliklendirmek için rastgele bir başlangıç noktası seçelim.
-        int start_choice = rand() % 3;
-
-        for (int i = 0; i < 3; i++) {
-            int choice = (start_choice + i) % 3;
-
-            if (choice == 0 && fe->usedCapacity + 1 <= fe->capacity) {
-                Car* car = Square_car_Left(square);
-                if (car) {
-                    fe->cars[fe->car_count++] = car;
-                    fe->usedCapacity += 1;
-                    printf("Loaded a Car. Ferry capacity: %d/%d\n", fe->usedCapacity, fe->capacity);
-                    vehicle_loaded_in_this_iteration = true;
-                }
-            } else if (choice == 1 && fe->usedCapacity + 2 <= fe->capacity) {
-                Minibus* minibus = Square_minibus_Left(square);
-                if (minibus) {
-                    fe->minibusses[fe->minibus_count++] = minibus;
-                    fe->usedCapacity += 2;
-                    printf("Loaded a Minibus. Ferry capacity: %d/%d\n", fe->usedCapacity, fe->capacity);
-                    vehicle_loaded_in_this_iteration = true;
-                }
-            } else if (choice == 2 && fe->usedCapacity + 3 <= fe->capacity) {
-                Truck* truck = Square_truck_Left(square);
-                if (truck) {
-                    fe->trucks[fe->truck_count++] = truck;
-                    fe->usedCapacity += 3;
-                    printf("Loaded a Truck. Ferry capacity: %d/%d\n", fe->usedCapacity, fe->capacity);
-                    vehicle_loaded_in_this_iteration = true;
-                }
-            }
-        }
-
-        // Eğer bir tam turda (3 araç tipi denemesinde) hiç araç yüklenemediyse,
-        // bu ya meydanın boş olduğu ya da kalan araçların kapasiteye sığmadığı anlamına gelir.
-        // Bu durumda yüklemeyi bitir.
-        if (!vehicle_loaded_in_this_iteration) {
+        
+        // Eğer meydanda hiç araç kalmadıysa, yükleme denemesini bitir.
+        if (is_square_empty(square)) {
             break;
         }
+
+        int choice = rand() % 3; // Rastgele araç türü seçimi korunuyor
+
+        if (choice == 0 && fe->usedCapacity + 1 <= fe->capacity) {
+            Car* car = Square_car_Left(square);
+            if (car) {
+                fe->cars[fe->car_count++] = car;
+                fe->usedCapacity += 1;
+                printf("Loaded a vehicle. Ferry capacity: %d/%d\n", fe->usedCapacity, fe->capacity);
+            }
+        } else if (choice == 1 && fe->usedCapacity + 2 <= fe->capacity) {
+            Minibus* minibus = Square_minibus_Left(square);
+            if (minibus) {
+                fe->minibusses[fe->minibus_count++] = minibus;
+                fe->usedCapacity += 2;
+                printf("Loaded a vehicle. Ferry capacity: %d/%d\n", fe->usedCapacity, fe->capacity);
+            }
+        } else if (choice == 2 && fe->usedCapacity + 3 <= fe->capacity) {
+            Truck* truck = Square_truck_Left(square);
+            if (truck) {
+                fe->trucks[fe->truck_count++] = truck;
+                fe->usedCapacity += 3;
+                printf("Loaded a vehicle. Ferry capacity: %d/%d\n", fe->usedCapacity, fe->capacity);
+            }
+        }
+        // Başarısız deneme sayacı yok. Meydan boş değilse döngü devam eder.
     }
 }
 

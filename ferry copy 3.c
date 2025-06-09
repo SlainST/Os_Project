@@ -15,15 +15,6 @@
 #include "square.h"
 #include "behind_square.h"
 
-// Bu dosyaya özel, bir bekleme meydanının tamamen boş olup olmadığını kontrol eden yardımcı fonksiyon
-static bool is_square_empty(Square* square) {
-    if (!square) return true;
-    for (int i = 0; i < CARS_LENGTH; i++) if (square->cars[i]) return false;
-    for (int i = 0; i < MINIBUSES_LENGTH; i++) if (square->minibuses[i]) return false;
-    for (int i = 0; i < TRUCKS_LENGTH; i++) if (square->trucks[i]) return false;
-    return true;
-}
-
 void Ferry_init(Ferry* fe) {
     fe->capacity = 20;
     fe->usedCapacity = 0;
@@ -45,50 +36,47 @@ void wait_mses(long milisaniye) {
 
 void Take_vehicles(Ferry* fe, Square* square) {
     if (!fe || !square) return;
+    
+    wait_mses(200);
 
-    wait_mses(300); // Yükleme başlangıcındaki bekleme süresi korunuyor.
-
+    int attempts_without_load = 0;
     while (fe->usedCapacity < fe->capacity) {
-        bool vehicle_loaded_in_this_iteration = false;
+        if (attempts_without_load > 5) {
+             break;
+        }
 
-        // Her iterasyonda farklı bir araç tipini önceliklendirmek için rastgele bir başlangıç noktası seçelim.
-        int start_choice = rand() % 3;
+        int choice = rand() % 3;
+        bool loaded_this_try = false;
 
-        for (int i = 0; i < 3; i++) {
-            int choice = (start_choice + i) % 3;
-
-            if (choice == 0 && fe->usedCapacity + 1 <= fe->capacity) {
-                Car* car = Square_car_Left(square);
-                if (car) {
-                    fe->cars[fe->car_count++] = car;
-                    fe->usedCapacity += 1;
-                    printf("Loaded a Car. Ferry capacity: %d/%d\n", fe->usedCapacity, fe->capacity);
-                    vehicle_loaded_in_this_iteration = true;
-                }
-            } else if (choice == 1 && fe->usedCapacity + 2 <= fe->capacity) {
-                Minibus* minibus = Square_minibus_Left(square);
-                if (minibus) {
-                    fe->minibusses[fe->minibus_count++] = minibus;
-                    fe->usedCapacity += 2;
-                    printf("Loaded a Minibus. Ferry capacity: %d/%d\n", fe->usedCapacity, fe->capacity);
-                    vehicle_loaded_in_this_iteration = true;
-                }
-            } else if (choice == 2 && fe->usedCapacity + 3 <= fe->capacity) {
-                Truck* truck = Square_truck_Left(square);
-                if (truck) {
-                    fe->trucks[fe->truck_count++] = truck;
-                    fe->usedCapacity += 3;
-                    printf("Loaded a Truck. Ferry capacity: %d/%d\n", fe->usedCapacity, fe->capacity);
-                    vehicle_loaded_in_this_iteration = true;
-                }
+        if (choice == 0 && fe->usedCapacity + 1 <= fe->capacity) {
+            Car* car = Square_car_Left(square);
+            if (car) {
+                fe->cars[fe->car_count++] = car;
+                fe->usedCapacity += 1;
+                loaded_this_try = true;
+            }
+        } else if (choice == 1 && fe->usedCapacity + 2 <= fe->capacity) {
+            Minibus* minibus = Square_minibus_Left(square);
+            if (minibus) {
+                fe->minibusses[fe->minibus_count++] = minibus;
+                fe->usedCapacity += 2;
+                loaded_this_try = true;
+            }
+        } else if (choice == 2 && fe->usedCapacity + 3 <= fe->capacity) {
+            Truck* truck = Square_truck_Left(square);
+            if (truck) {
+                fe->trucks[fe->truck_count++] = truck;
+                fe->usedCapacity += 3;
+                loaded_this_try = true;
             }
         }
 
-        // Eğer bir tam turda (3 araç tipi denemesinde) hiç araç yüklenemediyse,
-        // bu ya meydanın boş olduğu ya da kalan araçların kapasiteye sığmadığı anlamına gelir.
-        // Bu durumda yüklemeyi bitir.
-        if (!vehicle_loaded_in_this_iteration) {
-            break;
+        if (loaded_this_try) {
+            printf("Loaded a vehicle. Ferry capacity: %d/%d\n", fe->usedCapacity, fe->capacity);
+            attempts_without_load = 0;
+            wait_mses(100);
+        } else {
+            attempts_without_load++;
         }
     }
 }

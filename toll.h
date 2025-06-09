@@ -27,7 +27,7 @@ typedef struct Toll Toll;
 
 Toll* Toll_create_vehicle_arrays(); 
 void Toll_destroy_vehicle_arrays(Toll* toll); //examples
-
+void wait_ms(long milisaniye);
 
 void Toll_random_choose(Toll* toll_instance,struct Behind_Square* bs_instance);
 

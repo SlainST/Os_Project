@@ -1,3 +1,4 @@
+
 #ifndef FERRY_H
 #define FERRY_H
 
@@ -11,6 +12,8 @@ struct Behind_Square;
 #include <ctype.h>
 #include <time.h>
 #include <stdlib.h>
+
+// #include "toll.h"
 
 #include "minibus.h"
 #include "car.h"
@@ -27,8 +30,10 @@ extern const int lengthOfTrucks;
 
 struct Ferry {
     int capacity;
+    bool isWentToAcross;
+    bool inFirstRound;
     int usedCapacity;
-    int inWhichSquare; // Sadece bu değişken konumu belirleyecek
+    int inWhichSquare;
     Car* cars[20];
     Minibus* minibusses[10];
     Truck* trucks[6];
@@ -41,7 +46,10 @@ struct Ferry {
 typedef struct Ferry Ferry;
 
 void Ferry_init(Ferry* fe);
-void Take_vehicles(Ferry* fe, struct Square* square0);
-void Pass_vehicles(Ferry* fe, struct Behind_Square* bs2);
+
+void Take_vehicles(Ferry* fe,struct  Square* square0);
+
+void Pass_vehicles(Ferry* fe,struct Behind_Square* bs2);
+//void Pass_vehicles(Ferry* fe,struct Square* square1,struct Square* square2,struct Behind_Square* bs1,struct Behind_Square* bs2);
 
 #endif

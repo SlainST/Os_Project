@@ -148,7 +148,7 @@ void process_all_vehicles_through_tolls(int side_index) {
         if (bs->cars[i] != NULL) {
             // Basitlik adına, rastgele bir gişe seçelim.
             // Gerçekte HGS/OGS bakiyesi kontrolü de burada yapılabilir.
-            wait_ms(bs->cars[i]->busyTime); // Gişedeki işlem süresi
+            wait_ms(bs->cars[i]->busyTime); 
             
             // Aracı Square'e taşı
             for (int j = 0; j < CARS_LENGTH; j++) {
@@ -212,25 +212,23 @@ int main() {
         int other_side = 1 - current_side;
         printf("Ferry is at SIDE %d.\n", current_side);
 
-        // 1. Adım: Feribot doluysa, araçları indir.
+        // 1. Adım: If ferry filled move vehicles
         if (ferry.usedCapacity > 0) {
             printf("Unloading ferry at SIDE %d...\n", current_side);
             Pass_vehicles(&ferry, &behind_squares[current_side]);
             print_simulation_state(); // Durumu gör
         }
         
-        // 2. Adım: Mevcut yakadaki tüm araçları gişelerden geçir ve meydana taşı.
+        // 2. Toll moves
         printf("Vehicles at SIDE %d moving through tolls to the waiting square...\n", current_side);
         process_all_vehicles_through_tolls(current_side);
         print_simulation_state(); // Durumu gör
 
-        // 3. Adım: Feribotu verimli bir şekilde doldur.
+        // 3. Ferrybot carry
         printf("Loading ferry from SIDE %d...\n", current_side);
         Take_vehicles(&ferry, &squares[current_side]);
         
-        // 4. Adım: Feribot hareket mantığı.
-        // - Yolcusu varsa hareket eder.
-        // - Yolcusu yoksa VE bulunduğu yakada hiç araç kalmadıysa AMA karşı yakada araç varsa, boş olarak karşıya gider.
+        // 4. FERRYBOT MOVES.
         if (ferry.usedCapacity > 0 || (!is_any_vehicle_on_side(current_side) && is_any_vehicle_on_side(other_side))) {
             printf("Ferry is moving to SIDE %d.\n", other_side);
             ferry.inWhichSquare = other_side;
@@ -239,7 +237,7 @@ int main() {
         }
 
         print_simulation_state();
-        sleep(1); // Her turun sonunda bekleme
+        
     }
 
     printf("\n======================================================\n");

@@ -28,7 +28,7 @@ extern const int lengthOfTrucks;
 struct Ferry {
     int capacity;
     int usedCapacity;
-    int inWhichSquare; // Sadece bu değişken konumu belirleyecek
+    int inWhichSquare; // side
     Car* cars[20];
     Minibus* minibusses[10];
     Truck* trucks[6];

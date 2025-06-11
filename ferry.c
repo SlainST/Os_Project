@@ -15,19 +15,11 @@
 #include "square.h"
 #include "behind_square.h"
 
-// Bu dosyaya özel, bir bekleme meydanının tamamen boş olup olmadığını kontrol eden yardımcı fonksiyon
-static bool is_square_empty(Square* square) {
-    if (!square) return true;
-    for (int i = 0; i < CARS_LENGTH; i++) if (square->cars[i]) return false;
-    for (int i = 0; i < MINIBUSES_LENGTH; i++) if (square->minibuses[i]) return false;
-    for (int i = 0; i < TRUCKS_LENGTH; i++) if (square->trucks[i]) return false;
-    return true;
-}
 
 void Ferry_init(Ferry* fe) {
     fe->capacity = 20;
     fe->usedCapacity = 0;
-    fe->inWhichSquare = 0; // Feribot başlangıçta 0. yakada
+    fe->inWhichSquare = 0; //which side
 
     fe->car_count = 0;
     fe->minibus_count = 0;
@@ -46,12 +38,12 @@ void wait_mses(long milisaniye) {
 void Take_vehicles(Ferry* fe, Square* square) {
     if (!fe || !square) return;
 
-    wait_mses(300); // Yükleme başlangıcındaki bekleme süresi korunuyor.
+    wait_mses(300); 
 
     while (fe->usedCapacity < fe->capacity) {
         bool vehicle_loaded_in_this_iteration = false;
 
-        // Her iterasyonda farklı bir araç tipini önceliklendirmek için rastgele bir başlangıç noktası seçelim.
+        
         int start_choice = rand() % 3;
 
         for (int i = 0; i < 3; i++) {
@@ -62,7 +54,7 @@ void Take_vehicles(Ferry* fe, Square* square) {
                 if (car) {
                     fe->cars[fe->car_count++] = car;
                     fe->usedCapacity += 1;
-                    printf("Loaded a Car. Ferry capacity: %d/%d\n", fe->usedCapacity, fe->capacity);
+                    printf("Loaded car: %d into ferry. Ferry capacity: %d/%d\n",car->randomId, fe->usedCapacity, fe->capacity);
                     vehicle_loaded_in_this_iteration = true;
                 }
             } else if (choice == 1 && fe->usedCapacity + 2 <= fe->capacity) {
@@ -70,7 +62,7 @@ void Take_vehicles(Ferry* fe, Square* square) {
                 if (minibus) {
                     fe->minibusses[fe->minibus_count++] = minibus;
                     fe->usedCapacity += 2;
-                    printf("Loaded a Minibus. Ferry capacity: %d/%d\n", fe->usedCapacity, fe->capacity);
+                    printf("Loaded minibus: %d into ferry. Ferry capacity: %d/%d\n",minibus->randomId, fe->usedCapacity, fe->capacity);
                     vehicle_loaded_in_this_iteration = true;
                 }
             } else if (choice == 2 && fe->usedCapacity + 3 <= fe->capacity) {
@@ -78,15 +70,14 @@ void Take_vehicles(Ferry* fe, Square* square) {
                 if (truck) {
                     fe->trucks[fe->truck_count++] = truck;
                     fe->usedCapacity += 3;
-                    printf("Loaded a Truck. Ferry capacity: %d/%d\n", fe->usedCapacity, fe->capacity);
+                    printf("Loaded truck: %d into ferry. Ferry capacity: %d/%d\n",truck->randomId,fe->usedCapacity, fe->capacity);
                     vehicle_loaded_in_this_iteration = true;
                 }
             }
         }
 
-        // Eğer bir tam turda (3 araç tipi denemesinde) hiç araç yüklenemediyse,
-        // bu ya meydanın boş olduğu ya da kalan araçların kapasiteye sığmadığı anlamına gelir.
-        // Bu durumda yüklemeyi bitir.
+        // if no vehicle loaded in three attempt,that means there is no vehicle or vehicles not fitting. finish the load 
+
         if (!vehicle_loaded_in_this_iteration) {
             break;
         }
@@ -105,6 +96,7 @@ void Pass_vehicles(Ferry* fe, Behind_Square* bs) {
             for (int j = 0; j < carsLength; j++) {
                 if (bs->cars[j] == NULL) {
                     bs->cars[j] = car;
+                    printf("Car %d moved to cross!\n", car->randomId);
                     break;
                 }
             }
@@ -122,6 +114,7 @@ void Pass_vehicles(Ferry* fe, Behind_Square* bs) {
             for (int j = 0; j < minibusesLength; j++) {
                 if (bs->minibuses[j] == NULL) {
                     bs->minibuses[j] = minibus;
+                    printf("Minibus %d moved to cross!\n", minibus->randomId);
                     break;
                 }
             }
@@ -139,6 +132,7 @@ void Pass_vehicles(Ferry* fe, Behind_Square* bs) {
             for (int j = 0; j < trucksLength; j++) {
                 if (bs->trucks[j] == NULL) {
                     bs->trucks[j] = truck;
+                    printf("Truck %d moved to cross!\n", truck->randomId);
                     break;
                 }
             }

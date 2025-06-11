@@ -48,7 +48,7 @@ Car* Behind_Square_Car_Left(Behind_Square* self){
     }
     carWillBeSent=self->cars[vehicle_type_choice];
     self->cars[vehicle_type_choice]=NULL;
-    return carWillBeSent; //mantık hatası var ayrılırken boşaltmam lazım orayı
+    return carWillBeSent; 
     
 }
 
@@ -77,7 +77,7 @@ Minibus* Behind_Square_Minibus_Left(Behind_Square* self){
     }
     minibusWillBeSent=self->minibuses[vehicle_type_choice];
     self->minibuses[vehicle_type_choice]=NULL;
-    return minibusWillBeSent; //mantık hatası var ayrılırken boşaltmam lazım orayı
+    return minibusWillBeSent; 
 }
 
 Truck* Behind_Square_Truck_Left(Behind_Square* self){
@@ -105,5 +105,5 @@ Truck* Behind_Square_Truck_Left(Behind_Square* self){
     }
     truckWillBeSent=self->trucks[vehicle_type_choice];
     self->trucks[vehicle_type_choice]=NULL;
-    return truckWillBeSent; //mantık hatası var ayrılırken boşaltmam lazım orayı
+    return truckWillBeSent; 
 }
